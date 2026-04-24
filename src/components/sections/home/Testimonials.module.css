@@ -1,0 +1,56 @@
+.section {
+  padding: 5.5rem var(--page-px);
+  background: #0d0d0d;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 2.5rem;
+}
+.title em { font-style: italic; color: var(--color-moss); }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,.06); }
+
+.card {
+  background: #141414;
+  padding: 2rem 1.8rem;
+  transition: background var(--transition-base);
+}
+.card:hover { background: #1a1a1a; }
+
+.qmark {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-moss);
+  line-height: 0.8;
+  display: block;
+  margin-bottom: 0.9rem;
+  opacity: 0.7;
+}
+
+.text {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.85;
+  font-style: italic;
+  margin-bottom: 1.4rem;
+  font-weight: 400;
+}
+
+.name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+}
+
+.role {
+  font-size: 0.6875rem;
+  color: var(--color-moss);
+  margin-top: 0.2rem;
+  letter-spacing: 0.04em;
+}

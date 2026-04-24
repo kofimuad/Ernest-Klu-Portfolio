@@ -1,0 +1,95 @@
+/* ─────────────────────────────────────────
+   Utility Classes
+───────────────────────────────────────── */
+
+/* Typography */
+.u-eyebrow {
+  font-size: 0.625rem;       /* 10px */
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-moss);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.4rem;
+}
+.u-eyebrow::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--color-moss-dim);
+  flex-shrink: 0;
+}
+
+/* Buttons */
+.u-btn-dark {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: none;
+  padding: 0.85rem 2rem;
+  transition: background var(--transition-base);
+  display: inline-block;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.u-btn-dark:hover { background: var(--color-moss); }
+
+.u-btn-ghost {
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid rgba(28, 28, 26, 0.3);
+  padding: 0.85rem 2rem;
+  transition: all var(--transition-base);
+  display: inline-block;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.u-btn-ghost:hover {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  border-color: var(--color-ink);
+}
+
+.u-btn-ghost-light {
+  background: transparent;
+  color: var(--color-cream);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid rgba(245, 242, 236, 0.3);
+  padding: 0.85rem 2rem;
+  transition: all var(--transition-base);
+  display: inline-block;
+  cursor: pointer;
+}
+.u-btn-ghost-light:hover {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+/* Page padding */
+.u-px { padding-left: var(--page-px); padding-right: var(--page-px); }
+.u-section { padding-top: var(--space-12); padding-bottom: var(--space-12); }
+
+/* Visually hidden (a11y) */
+.u-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

@@ -1,0 +1,65 @@
+.section { padding: 5.5rem var(--page-px); background: var(--color-white); }
+
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3.5rem;
+  align-items: end;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+.title em { font-style: italic; color: var(--color-moss); }
+
+.desc {
+  font-size: 0.875rem;
+  color: var(--color-ink);
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 3rem;
+  border-top: 1px solid var(--color-border);
+  list-style: none;
+}
+
+.step {
+  padding: 2rem 1.5rem 2rem 0;
+  border-right: 1px solid var(--color-border);
+}
+.step:not(:first-child) { padding-left: 1.5rem; }
+.step:last-child { border-right: none; padding-right: 0; }
+
+.num {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: rgba(110, 131, 133, 0.2);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.9rem;
+}
+
+.stepTitle {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: 0.5rem;
+}
+
+.stepDesc {
+  font-size: 0.8125rem;
+  color: var(--color-ink);
+  line-height: 1.75;
+  font-weight: 500;
+}

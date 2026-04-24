@@ -1,0 +1,20 @@
+.footer {
+  background: var(--color-ink);
+  border-top: 1px solid rgba(245,242,236,.08);
+  padding: 2.2rem var(--page-px);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo {
+  font-family: var(--font-serif); font-size: 0.9375rem; font-weight: 700;
+  color: var(--color-cream); cursor: pointer;
+}
+.dot { color: var(--color-moss-dim); }
+.links { display: flex; gap: 1.8rem; list-style: none; }
+.links a {
+  font-size: 0.625rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(245,242,236,.4);
+  transition: color var(--transition-base);
+}
+.links a:hover { color: var(--color-moss-dim); }
+.copy { font-size: 0.6875rem; color: rgba(245,242,236,.22); }

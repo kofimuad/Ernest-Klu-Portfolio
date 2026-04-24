@@ -1,0 +1,5 @@
+.section { padding: 5.5rem var(--page-px); background: var(--color-cream); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; border-top: 1px solid rgba(92,98,72,.08); }
+.title { font-family: var(--font-serif); font-size: clamp(1.6rem,2.8vw,2.4rem); font-weight: 700; line-height: 1.1; color: var(--color-ink); }
+.title em { font-style: italic; color: var(--color-moss); }
+.body { font-size: .8125rem; color: var(--color-stone-dk); line-height: 1.85; margin-bottom: .8rem; }
+.btn { margin-top: 1.5rem; }

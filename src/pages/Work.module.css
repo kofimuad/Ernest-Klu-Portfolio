@@ -1,0 +1,4 @@
+.cta { background: var(--color-cream-mid); padding: 4.5rem var(--page-px); text-align: center; border-top: 1px solid rgba(92,98,72,.1); }
+.ctaTitle { font-family: var(--font-serif); font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 700; color: var(--color-ink); margin-bottom: .7rem; }
+.ctaTitle em { font-style: italic; color: var(--color-moss); }
+.ctaDesc { font-size: .8125rem; color: var(--color-stone-dk); margin-bottom: 1.8rem; }

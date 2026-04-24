@@ -1,0 +1,13 @@
+.header { padding: 5.5rem var(--page-px) 0; background: var(--color-cream); }
+.headerInner { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; }
+.title { font-family: var(--font-serif); font-size: clamp(1.8rem,3vw,2.8rem); font-weight: 700; line-height: 1.1; color: var(--color-ink); }
+.title em { font-style: italic; color: var(--color-moss); }
+.viewAll { font-size: .6875rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--color-moss); border: none; border-bottom: 1px solid var(--color-moss-dim); padding-bottom: 2px; background: transparent; cursor: pointer; transition: color var(--transition-base), border-color var(--transition-base); }
+.viewAll:hover { color: var(--color-ink); border-color: var(--color-ink); }
+.wrap { padding: 0 var(--page-px) 5.5rem; background: var(--color-cream); }
+.featured { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3px; margin-bottom: 3px; }
+.featuredMain { aspect-ratio: 4/3; }
+.featuredCol { display: flex; flex-direction: column; gap: 3px; }
+.featuredSmall { flex: 1; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
+.gridCard { aspect-ratio: 4/3; }

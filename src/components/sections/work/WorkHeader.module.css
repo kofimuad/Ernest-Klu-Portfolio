@@ -1,0 +1,4 @@
+.wrap { padding: calc(var(--nav-height) + 3rem) var(--page-px) 2.5rem; border-bottom: 1px solid rgba(92,98,72,.1); display: flex; align-items: flex-end; justify-content: space-between; background: var(--color-white); }
+.title { font-family: var(--font-serif); font-size: clamp(2.8rem,5vw,4.5rem); font-weight: 700; line-height: 1; color: var(--color-ink); }
+.title em { font-style: italic; color: var(--color-moss); }
+.desc { font-size: .8125rem; color: var(--color-stone-dk); max-width: 300px; line-height: 1.75; }

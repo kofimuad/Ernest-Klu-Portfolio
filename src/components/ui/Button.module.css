@@ -1,0 +1,74 @@
+.btn {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--transition-base),
+    color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-fast),
+    box-shadow var(--transition-base);
+  border: 1px solid transparent;
+  line-height: 1;
+}
+
+.btn.fullWidth { width: 100%; justify-content: center; }
+
+/* Dark */
+.dark {
+  background: var(--color-ink);
+  color: var(--color-white);
+  border-color: var(--color-ink);
+}
+.dark:hover {
+  background: var(--color-moss);
+  border-color: var(--color-moss);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(110, 131, 133, 0.3);
+}
+
+/* Ghost */
+.ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: rgba(16, 16, 16, 0.28);
+}
+.ghost:hover {
+  background: var(--color-ink);
+  color: var(--color-white);
+  border-color: var(--color-ink);
+  transform: translateY(-1px);
+}
+
+/* Light — solid white, for dark-background CTAs */
+.light {
+  background: var(--color-white);
+  color: var(--color-ink);
+  border-color: var(--color-white);
+}
+.light:hover {
+  background: transparent;
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: translateY(-1px);
+}
+
+/* Ghost Light (for dark backgrounds) */
+.ghost_light {
+  background: transparent;
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.ghost_light:hover {
+  background: var(--color-white);
+  color: var(--color-ink);
+  border-color: var(--color-white);
+}

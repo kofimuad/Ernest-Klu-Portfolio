@@ -1,0 +1,5 @@
+.header { padding: 4.5rem var(--page-px) 2.5rem; border-bottom: 1px solid rgba(92,98,72,.1); background: var(--color-white); }
+.title { font-family: var(--font-serif); font-size: clamp(2.8rem,5vw,4.5rem); font-weight: 700; line-height: 1; color: var(--color-ink); }
+.title em { font-style: italic; color: var(--color-moss); }
+.sub { font-size: .8125rem; color: var(--color-stone-dk); margin-top: .8rem; max-width: 480px; line-height: 1.75; }
+.body { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; padding: 4.5rem var(--page-px); background: var(--color-cream); }

@@ -1,0 +1,4 @@
+.wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; padding: var(--page-px); text-align: center; background: var(--color-white); }
+.code { font-family: var(--font-serif); font-size: 6rem; font-weight: 700; color: rgba(92,98,72,.15); line-height: 1; }
+.title { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--color-ink); margin-bottom: .8rem; }
+.desc { font-size: .875rem; color: var(--color-stone-dk); margin-bottom: 2rem; }

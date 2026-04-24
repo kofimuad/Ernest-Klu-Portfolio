@@ -1,0 +1,5 @@
+.wrap { border-top: 1px solid rgba(92,98,72,.1); border-bottom: 1px solid rgba(92,98,72,.1); background: var(--color-cream-mid); padding: .75rem 0; overflow: hidden; }
+.track { display: flex; gap: 0; animation: scroll 24s linear infinite; white-space: nowrap; }
+.item { font-size: .625rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--color-stone-dk); display: flex; align-items: center; gap: 1.2rem; padding-right: 1.2rem; }
+.dot { color: var(--color-moss-light); font-size: .8125rem; line-height: 1; }
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
