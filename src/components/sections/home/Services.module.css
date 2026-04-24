@@ -1,12 +1,5 @@
 .section { padding: 5.5rem var(--page-px); background: var(--color-white); }
 .intro { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: end; margin-bottom: 2.5rem; }
-
-@media (max-width: 768px) {
-  .section { padding: 3.5rem var(--page-px); }
-  .intro { grid-template-columns: 1fr; gap: 1.2rem; }
-  .grid { grid-template-columns: 1fr; }
-  .card { padding: 2rem 1.6rem; }
-}
 .title { font-family: var(--font-serif); font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 700; line-height: 1.1; color: var(--color-ink); }
 .title em { font-style: italic; color: var(--color-moss); }
 .desc { font-size: .8125rem; color: var(--color-stone-dk); line-height: 1.85; }
@@ -32,3 +25,12 @@
 .cardDark .list li::before { color: rgba(245,242,236,.3); }
 .cardLight .list li { color: var(--color-stone-dk); }
 .cardLight .list li::before { color: var(--color-moss-dim); }
+
+@media (max-width: 768px) {
+  .section { padding: 3rem var(--page-px); }
+  .intro { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.8rem; }
+  .grid { grid-template-columns: 1fr; gap: 0.75rem; }
+  .card { padding: 1.75rem 1.5rem; }
+  .num { font-size: 2.5rem; top: 1rem; right: 1.2rem; }
+  .cardTitle { font-size: 1.15rem; }
+}

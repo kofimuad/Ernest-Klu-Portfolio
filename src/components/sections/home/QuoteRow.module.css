@@ -1,8 +1,4 @@
 .wrap { background: var(--color-ink); padding: 5rem var(--page-px); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-
-@media (max-width: 768px) {
-  .wrap { grid-template-columns: 1fr; gap: 2.5rem; padding: 3.5rem var(--page-px); }
-}
 .quote { font-family: var(--font-serif); font-size: clamp(1.2rem,2vw,1.8rem); font-style: normal; font-weight: 400; color: var(--color-cream); line-height: 1.55; margin-bottom: 1.2rem; }
 .quote p { quotes: none; }
 .quote em { font-style: italic; color: var(--color-moss-dim); }
@@ -14,3 +10,7 @@
 .discIcon { width: 34px; height: 34px; background: var(--color-moss); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .discTitle { font-family: var(--font-serif); font-size: .9375rem; font-weight: 700; color: var(--color-cream); }
 .discSub { font-size: .6875rem; color: var(--color-stone); margin-top: .15rem; }
+
+@media (max-width: 768px) {
+  .wrap { grid-template-columns: 1fr; gap: 2.5rem; padding: 3.5rem var(--page-px); }
+}
