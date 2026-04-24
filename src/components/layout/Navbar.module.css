@@ -122,8 +122,8 @@
   border-left: 1px solid var(--_drop-border);
 }
 
-.hasDropdown:hover .dropdown,
-.hasDropdown:focus-within .dropdown {
+.hasDropdown:focus-within .dropdown,
+.dropdownOpen {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;

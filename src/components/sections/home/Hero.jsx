@@ -44,6 +44,10 @@ export default function Hero() {
           <p className={styles.captionName}>Ernest Klu</p>
           <p className={styles.captionRole}>Architect · Sound Engineer · Accra, GH</p>
         </div>
+        <div className={styles.scrollIndicator}>
+          <span className={styles.scrollIndicatorLabel}>Scroll</span>
+          <span className={styles.scrollIndicatorLine} />
+        </div>
       </div>
     </section>
   )

@@ -1,17 +1,26 @@
 import { useNavigate } from 'react-router-dom'
 import Eyebrow from '@/components/ui/Eyebrow'
 import ProjectCard from '@/components/ui/ProjectCard'
+import { useInView } from '@/hooks/useInView'
 import { PROJECTS } from '@/data/content'
 import styles from './FeaturedProjects.module.css'
 
 export default function FeaturedProjects() {
   const navigate = useNavigate()
+  const [headerRef, headerVisible] = useInView({ threshold: 0.2 })
+  const [featuredRef, featuredVisible] = useInView({ threshold: 0.1 })
+  const [gridRef, gridVisible] = useInView({ threshold: 0.05 })
+
   const featured = PROJECTS.filter((p) => p.featured)
   const grid3 = PROJECTS.filter((p) => !p.featured).slice(0, 3)
 
   return (
     <>
-      <section className={styles.header} aria-labelledby="projects-heading">
+      <section
+        ref={headerRef}
+        className={[styles.header, 'reveal', headerVisible ? 'visible' : ''].join(' ')}
+        aria-labelledby="projects-heading"
+      >
         <div className={styles.headerInner}>
           <div>
             <Eyebrow>Selected Work</Eyebrow>
@@ -27,34 +36,34 @@ export default function FeaturedProjects() {
 
       <div className={styles.wrap}>
         {/* Featured: large left + stacked right */}
-        <div className={styles.featured}>
+        <div
+          ref={featuredRef}
+          className={[styles.featured, 'reveal', featuredVisible ? 'visible' : ''].join(' ')}
+        >
           <ProjectCard
-            project={{ ...featured[0], num: '01' }}
+            project={{ ...featured[0] }}
             className={styles.featuredMain}
             style={{ aspectRatio: '4/3' }}
-            onClick={() => navigate('/work')}
           />
           <div className={styles.featuredCol}>
-            {featured.slice(1).map((p) => (
+            {featured.slice(1).map((p, i) => (
               <ProjectCard
                 key={p.id}
                 project={p}
-                className={styles.featuredSmall}
-                onClick={() => navigate('/work')}
+                className={[styles.featuredSmall, `reveal-d${i + 1}`].join(' ')}
               />
             ))}
           </div>
         </div>
 
         {/* 3-column bottom grid */}
-        <div className={styles.grid3}>
-          {grid3.map((p) => (
+        <div ref={gridRef} className={styles.grid3}>
+          {grid3.map((p, i) => (
             <ProjectCard
               key={p.id}
               project={p}
-              className={styles.gridCard}
+              className={[styles.gridCard, 'reveal', gridVisible ? 'visible' : '', `reveal-d${i + 1}`].join(' ')}
               style={{ aspectRatio: '4/3' }}
-              onClick={() => navigate('/work')}
             />
           ))}
         </div>

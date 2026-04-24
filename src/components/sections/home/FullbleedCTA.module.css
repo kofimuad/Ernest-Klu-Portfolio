@@ -1,9 +1,36 @@
 .wrap {
+  position: relative;
   background: #161616;
   padding: 6rem var(--page-px);
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
+
+/* Faint background render */
+.wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/bbd183245060323.69a593c36a3ad.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+/* Film grain */
+.wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+}
+
+.content { position: relative; z-index: 1; }
 
 .content {
   width: 100%;

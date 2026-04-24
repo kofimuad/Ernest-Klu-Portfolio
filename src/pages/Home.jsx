@@ -2,6 +2,7 @@ import Hero            from '@/components/sections/home/Hero'
 import Marquee         from '@/components/sections/home/Marquee'
 import Services        from '@/components/sections/home/Services'
 import FeaturedProjects from '@/components/sections/home/FeaturedProjects'
+import ProjectStrip    from '@/components/sections/home/ProjectStrip'
 import QuoteRow        from '@/components/sections/home/QuoteRow'
 import TrustBar        from '@/components/sections/home/TrustBar'
 import Process         from '@/components/sections/home/Process'
@@ -16,6 +17,7 @@ export default function Home() {
       <Marquee />
       <Services />
       <FeaturedProjects />
+      <ProjectStrip />
       <QuoteRow />
       <TrustBar />
       <Process />

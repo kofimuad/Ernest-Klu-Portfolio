@@ -14,8 +14,25 @@ export default function ContactForm() {
 
   const handleSubmit = e => {
     e.preventDefault()
-    // TODO: wire to a backend / Formspree / EmailJS
-    console.log('Form submitted:', form)
+
+    const subject = `Project Inquiry — ${form.projectType || 'New Project'}`
+
+    const body = [
+      `Name:         ${form.firstName} ${form.lastName}`,
+      `Email:        ${form.email}`,
+      form.phone    ? `Phone:        ${form.phone}`        : null,
+      form.projectType ? `Project Type: ${form.projectType}` : null,
+      form.location ? `Location:     ${form.location}`    : null,
+      '',
+      'Project Details:',
+      form.message,
+    ].filter(l => l !== null).join('\n')
+
+    window.location.href =
+      `mailto:${SITE.email}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`
+
     setSubmitted(true)
   }
 
@@ -64,9 +81,9 @@ export default function ContactForm() {
         {/* Right: form */}
         {submitted ? (
           <div className={styles.success}>
-            <h2 className={styles.successTitle}>Message received.</h2>
-            <p className={styles.successBody}>Ernest will be in touch within 24 hours. Thank you for reaching out.</p>
-            <Button onClick={() => setSubmitted(false)} variant="ghost">Send another message</Button>
+            <h2 className={styles.successTitle}>Your email client has opened.</h2>
+            <p className={styles.successBody}>Your inquiry is pre-filled and ready to send — just hit send in your email app. Ernest typically responds within 24 hours.</p>
+            <Button onClick={() => setSubmitted(false)} variant="ghost">Start a new inquiry</Button>
           </div>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit} noValidate>

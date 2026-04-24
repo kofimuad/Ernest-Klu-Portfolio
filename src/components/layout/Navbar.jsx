@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { NAV_LINKS } from '@/data/content'
 import styles from './Navbar.module.css'
@@ -9,8 +9,18 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [mobileExpanded, setMobileExpanded] = useState(null)
+  const [openDropdown, setOpenDropdown] = useState(null)
+  const dropTimer = useRef(null)
 
   const isHeroPage = location.pathname === '/'
+
+  const openDrop = (label) => {
+    clearTimeout(dropTimer.current)
+    setOpenDropdown(label)
+  }
+  const closeDrop = () => {
+    dropTimer.current = setTimeout(() => setOpenDropdown(null), 160)
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -44,7 +54,12 @@ export default function Navbar() {
       <nav aria-label="Primary navigation" className={styles.nav}>
         <ul className={styles.links}>
           {NAV_LINKS.map(item => (
-            <li key={item.label} className={item.children ? styles.hasDropdown : ''}>
+            <li
+              key={item.label}
+              className={item.children ? styles.hasDropdown : ''}
+              onMouseEnter={() => item.children && openDrop(item.label)}
+              onMouseLeave={() => item.children && closeDrop()}
+            >
               <NavLink
                 to={item.path}
                 end={item.path === '/'}
@@ -53,15 +68,26 @@ export default function Navbar() {
                 }
               >
                 {item.label}
-                {item.children && <span className={styles.chevron} aria-hidden="true">›</span>}
+                {item.children && (
+                  <span
+                    className={[styles.chevron, openDropdown === item.label ? styles.chevronOpen : ''].join(' ')}
+                    aria-hidden="true"
+                  >›</span>
+                )}
               </NavLink>
               {item.children && (
-                <ul className={styles.dropdown} role="menu">
+                <ul
+                  className={[styles.dropdown, openDropdown === item.label ? styles.dropdownOpen : ''].join(' ')}
+                  role="menu"
+                  onMouseEnter={() => openDrop(item.label)}
+                  onMouseLeave={closeDrop}
+                >
                   {item.children.map(child => (
                     <li key={child.label} role="none">
                       <NavLink
                         to={child.path}
                         role="menuitem"
+                        onClick={() => setOpenDropdown(null)}
                         className={({ isActive }) =>
                           [styles.dropLink, isActive ? styles.active : ''].join(' ')
                         }

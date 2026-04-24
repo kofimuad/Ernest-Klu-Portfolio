@@ -1,0 +1,190 @@
+/* ─────────────────────────────────────────
+   ProjectStrip — cinematic horizontal filmstrip
+   Drag to scroll through project renders
+───────────────────────────────────────── */
+
+.root {
+  background: var(--color-ink);
+  padding-top: 3rem;
+  overflow: hidden;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── Section label ── */
+.label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 var(--page-px) 1.5rem;
+}
+.labelText {
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+}
+.labelLine {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  max-width: 120px;
+}
+
+/* ── Scrollable track ── */
+.track {
+  display: flex;
+  gap: 3px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 var(--page-px) 3rem;
+  cursor: grab;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.track::-webkit-scrollbar { display: none; }
+
+/* ── Individual item ── */
+.item {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(240px, 32vw, 420px);
+  height: clamp(320px, 52vh, 560px);
+  overflow: hidden;
+  cursor: pointer;
+  background: #1a1a18;
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.62) saturate(0.92);
+  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.7s ease;
+  will-change: transform;
+}
+.item:hover .img {
+  transform: scale(1.06);
+  filter: brightness(0.75) saturate(1);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(5, 5, 5, 0.92) 0%,
+    rgba(5, 5, 5, 0.2) 55%,
+    transparent 100%
+  );
+}
+
+/* ── Meta text ── */
+.meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.6rem 1.5rem;
+}
+.metaNum {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.4375rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-moss-dim);
+  margin-bottom: 0.5rem;
+}
+.metaTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.35rem;
+  transition: color var(--transition-base);
+}
+.item:hover .metaTitle { color: var(--color-moss-light); }
+
+.metaCat {
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+}
+
+/* ── Sequential index — top-right, large editorial number ── */
+.index {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.4rem;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.06);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  transition: color var(--transition-slow);
+  pointer-events: none;
+}
+.item:hover .index { color: rgba(255, 255, 255, 0.12); }
+
+/* ── See-all cap ── */
+.seeAll {
+  flex-shrink: 0;
+  width: clamp(140px, 20vw, 220px);
+  height: clamp(320px, 52vh, 560px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: border-color var(--transition-base), background var(--transition-base);
+}
+.seeAll:hover {
+  border-color: var(--color-moss);
+  background: rgba(110, 131, 133, 0.08);
+}
+.seeAllInner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.seeAllLabel {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: none;
+  letter-spacing: 0;
+  transition: color var(--transition-base);
+}
+.seeAll:hover .seeAllLabel { color: var(--color-white); }
+.seeAllArrow {
+  font-size: 1.25rem;
+  color: var(--color-moss);
+  transition: transform var(--transition-base);
+}
+.seeAll:hover .seeAllArrow { transform: translateX(4px); }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .root { padding-top: 2rem; }
+  .label { padding: 0 1.5rem 1rem; }
+  .track { padding: 0 1.5rem 2rem; gap: 2px; }
+  .item { width: clamp(200px, 70vw, 300px); height: 50vw; min-height: 240px; }
+  .seeAll { width: clamp(100px, 40vw, 160px); height: 50vw; min-height: 240px; }
+}

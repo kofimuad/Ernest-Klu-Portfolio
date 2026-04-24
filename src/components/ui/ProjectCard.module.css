@@ -1,51 +1,124 @@
 .card {
   position: relative;
   overflow: hidden;
-  background: var(--color-cream-mid);
+  background: var(--color-ink);
   cursor: pointer;
 }
+
 .image {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.72);
+  filter: brightness(0.68);
   transition: transform var(--transition-image), filter var(--transition-slow);
+  will-change: transform;
 }
-.card:hover .image { transform: scale(1.04); filter: brightness(0.82); }
+.card:hover .image {
+  transform: scale(1.05);
+  filter: brightness(0.80);
+}
+
 .gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(28,28,26,.78) 0%, transparent 55%);
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 8, 0.88) 0%,
+    rgba(10, 10, 8, 0.28) 50%,
+    transparent 100%
+  );
 }
-.arrow {
+
+/* ── Project number — top-left editorial label ── */
+.num {
   position: absolute;
-  top: 1.2rem; right: 1.2rem;
-  width: 34px; height: 34px;
-  background: var(--color-white);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--color-ink);
-  font-size: 13px;
-  opacity: 0;
-  transition: opacity var(--transition-base);
+  top: 1.4rem;
+  left: 1.6rem;
+  font-family: var(--font-serif);
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1;
+  transition: color var(--transition-base);
 }
-.card:hover .arrow { opacity: 1; }
+.card:hover .num { color: rgba(255, 255, 255, 0.65); }
+
+/* ── Arrow CTA — top-right ── */
+.arrowWrap {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base),
+    background var(--transition-base);
+}
+.card:hover .arrowWrap {
+  opacity: 1;
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.arrow {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: color var(--transition-base);
+}
+.card:hover .arrow { color: var(--color-ink); }
+
+/* ── Body ── */
 .body {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 1.8rem;
-  display: flex; align-items: flex-end; justify-content: space-between;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  transform: translateY(4px);
+  transition: transform var(--transition-slow);
 }
+.card:hover .body { transform: translateY(0); }
+
 .category {
-  font-size: 0.625rem; font-weight: 600;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--color-moss-dim); margin-bottom: 0.35rem;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-moss-dim);
+  margin-bottom: 0.4rem;
+  transition: color var(--transition-base);
 }
+.card:hover .category { color: var(--color-moss-light); }
+
 .title {
-  font-family: var(--font-serif); font-weight: 700;
-  color: var(--color-white); line-height: 1.15;
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
+
 .desc {
-  font-size: 0.75rem; color: rgba(245,242,236,.6);
-  margin-top: 0.3rem; line-height: 1.6;
+  font-size: 0.72rem;
+  color: rgba(245, 242, 236, 0.5);
+  margin-top: 0.4rem;
+  line-height: 1.65;
+  max-width: 32ch;
+  transition: color var(--transition-base);
 }
+.card:hover .desc { color: rgba(245, 242, 236, 0.72); }
