@@ -3,3 +3,11 @@
 .item:last-child { border-right: none; }
 .num { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 700; color: var(--color-ink); line-height: 1; display: block; margin-bottom: .4rem; }
 .lbl { font-size: .625rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--color-stone-dk); }
+
+@media (max-width: 640px) {
+  .wrap { grid-template-columns: 1fr 1fr; }
+  .item { padding: 1.8rem 1rem; }
+  .item:nth-child(2) { border-right: none; }
+  .item:nth-child(3) { border-top: 1px solid rgba(92,98,72,.1); }
+  .item:nth-child(4) { border-top: 1px solid rgba(92,98,72,.1); border-right: none; }
+}

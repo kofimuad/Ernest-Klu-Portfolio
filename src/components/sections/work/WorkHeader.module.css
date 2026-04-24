@@ -2,3 +2,8 @@
 .title { font-family: var(--font-serif); font-size: clamp(2.8rem,5vw,4.5rem); font-weight: 700; line-height: 1; color: var(--color-ink); }
 .title em { font-style: italic; color: var(--color-moss); }
 .desc { font-size: .8125rem; color: var(--color-stone-dk); max-width: 300px; line-height: 1.75; }
+
+@media (max-width: 768px) {
+  .wrap { flex-direction: column; align-items: flex-start; gap: 1rem; padding: calc(var(--nav-height) + 2rem) var(--page-px) 1.5rem; }
+  .desc { max-width: 100%; }
+}

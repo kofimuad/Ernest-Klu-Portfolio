@@ -16,3 +16,15 @@
 .philTitle em { font-style: italic; color: var(--color-moss); }
 .philBody { font-size: 0.8125rem; color: var(--color-stone-dk); line-height: 1.85; margin-bottom: .8rem; }
 .philBtn { margin-top: 1.2rem; }
+
+@media (max-width: 900px) {
+  .split { grid-template-columns: 1fr; min-height: unset; }
+  .photo { min-height: 50vw; max-height: 420px; }
+  .content { padding: 2.5rem var(--page-px) 3rem; }
+  .philosophy { grid-template-columns: 1fr; gap: 2rem; padding: 3.5rem var(--page-px); }
+}
+@media (max-width: 640px) {
+  .split { grid-template-rows: 60vw 1fr; }
+  .photo { min-height: 60vw; }
+  .stats { grid-template-columns: 1fr 1fr; }
+}

@@ -3,6 +3,8 @@
   border-top: 1px solid rgba(245,242,236,.08);
   padding: 2.2rem var(--page-px);
   display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.2rem;
 }
 .logo {
   font-family: var(--font-serif); font-size: 0.9375rem; font-weight: 700;
@@ -18,3 +20,8 @@
 }
 .links a:hover { color: var(--color-moss-dim); }
 .copy { font-size: 0.6875rem; color: rgba(245,242,236,.22); }
+
+@media (max-width: 640px) {
+  .footer { flex-direction: column; align-items: flex-start; gap: 1.4rem; padding: 2rem var(--page-px); }
+  .links { flex-wrap: wrap; gap: 1rem; }
+}

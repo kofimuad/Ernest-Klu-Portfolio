@@ -66,6 +66,14 @@ button { cursor: pointer; font-family: var(--font-sans); background: none; borde
 img, video { display: block; max-width: 100%; }
 ul, ol { list-style: none; }
 
+/* ── Mobile layout tokens ── */
+@media (max-width: 768px) {
+  :root {
+    --page-px:  1.25rem;
+    --space-12: 4rem;
+  }
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--color-cream); }

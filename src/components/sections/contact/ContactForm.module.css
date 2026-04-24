@@ -26,3 +26,11 @@
 .success { display: flex; flex-direction: column; justify-content: center; padding: 3rem 0; }
 .successTitle { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; color: var(--color-ink); margin-bottom: 1rem; }
 .successBody { font-size: 0.875rem; color: var(--color-stone-dk); line-height: 1.75; margin-bottom: 2rem; }
+
+@media (max-width: 768px) {
+  .hero { padding: calc(var(--nav-height) + 2rem) var(--page-px) 2rem; }
+  .hero .title { font-size: clamp(2rem,10vw,3rem); }
+  .grid { grid-template-columns: 1fr; gap: 0; padding: 2.5rem var(--page-px) 3rem; }
+  .row { grid-template-columns: 1fr; }
+  .info { padding-bottom: 2.5rem; border-bottom: 1px solid rgba(92,98,72,.12); margin-bottom: 2.5rem; }
+}
