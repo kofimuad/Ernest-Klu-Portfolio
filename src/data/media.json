@@ -1,4 +1,101 @@
 {
-  "cloudName": "",
-  "projects": {}
+  "cloudName": "unmfwxkr",
+  "projects": {
+    "akwaaba-rooftop-madina": {
+      "title": "Akwaaba Rooftop",
+      "location": "Madina",
+      "category": "Commercial",
+      "items": [
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/roof-top-restaurant",
+          "type": "video",
+          "w": 1920,
+          "h": 1080,
+          "duration": 73,
+          "web": true,
+          "poster": "ernest-klu/projects/akwaaba-rooftop-madina/roof-top-restaurant-poster"
+        }
+      ]
+    },
+    "hermanos-jungle-east-legon": {
+      "title": "Hermanos Jungle",
+      "location": "East Legon",
+      "category": "Recreational and Sports",
+      "items": [
+        {
+          "id": "ernest-klu/projects/hermanos-jungle-east-legon/hermanos-jungle",
+          "type": "video",
+          "w": 1280,
+          "h": 720,
+          "duration": 76,
+          "web": true,
+          "poster": "ernest-klu/projects/hermanos-jungle-east-legon/hermanos-jungle-poster"
+        }
+      ]
+    },
+    "kotoko-hq": {
+      "title": "Kotoko HQ",
+      "location": "",
+      "category": "Recreational and Sports",
+      "items": [
+        {
+          "id": "ernest-klu/projects/kotoko-hq/kotoko-final",
+          "type": "video",
+          "w": 1280,
+          "h": 720,
+          "duration": 99,
+          "web": true,
+          "poster": "ernest-klu/projects/kotoko-hq/kotoko-final-poster"
+        }
+      ]
+    },
+    "retreat-centre-pokuase-hills": {
+      "title": "Retreat Centre",
+      "location": "Pokuase Hills",
+      "category": "Religious",
+      "items": [
+        {
+          "id": "ernest-klu/projects/retreat-centre-pokuase-hills/final-animation",
+          "type": "video",
+          "w": 1920,
+          "h": 1080,
+          "duration": 38,
+          "web": true,
+          "poster": "ernest-klu/projects/retreat-centre-pokuase-hills/final-animation-poster"
+        }
+      ]
+    },
+    "riverstone-homes-east-legon": {
+      "title": "Riverstone Homes",
+      "location": "East Legon",
+      "category": "Residential",
+      "items": [
+        {
+          "id": "ernest-klu/projects/riverstone-homes-east-legon/animation-final",
+          "type": "video",
+          "w": 1280,
+          "h": 720,
+          "duration": 42,
+          "web": true,
+          "poster": "ernest-klu/projects/riverstone-homes-east-legon/animation-final-poster"
+        }
+      ]
+    },
+    "the-brick-house": {
+      "title": "The Brick House",
+      "location": "",
+      "category": "Residential",
+      "items": [
+        {
+          "id": "ernest-klu/projects/the-brick-house/anime",
+          "type": "video",
+          "w": 1280,
+          "h": 720,
+          "duration": 22,
+          "web": true,
+          "poster": "ernest-klu/projects/the-brick-house/anime-poster"
+        }
+      ]
+    }
+  }
 }
