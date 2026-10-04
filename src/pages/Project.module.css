@@ -64,6 +64,32 @@
   animation: up 1s var(--ease-out) 300ms both;
 }
 
+/* Film hero */
+video.heroImg { animation: none; background: var(--color-ink); }
+.heroFilm .heroShade,
+.heroFilm .heroText { opacity: 0; pointer-events: none; transition: opacity 400ms ease; }
+.heroFilm video.heroImg { object-fit: contain; }
+.playFilm {
+  position: absolute;
+  z-index: 2;
+  right: var(--page-px);
+  bottom: clamp(2rem, 5vw, 4rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  background: var(--color-white);
+  padding: 1rem 1.5rem;
+  border-radius: 100px;
+  transition: transform var(--transition-base), background var(--transition-base);
+}
+.playFilm:hover { transform: scale(1.04); background: var(--color-cream-mid); }
+.playFilm span { font-size: 0.75rem; }
+
 /* ── Info ── */
 .info {
   display: grid;
@@ -191,6 +217,7 @@ video.media { object-fit: contain; background: var(--color-ink); }
 }
 @media (max-width: 640px) {
   .hero { height: 78svh; min-height: 460px; }
+  .playFilm { left: var(--page-px); right: auto; top: calc(var(--nav-height) + 1.25rem); bottom: auto; }
   .row { flex-direction: column; }
   .cell { flex: none; width: 100%; }
   .solo .cell { width: 100%; }

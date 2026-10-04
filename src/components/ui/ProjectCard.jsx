@@ -5,16 +5,21 @@ import styles from './ProjectCard.module.css'
 
 export default function ProjectCard({ project, sizes = '(max-width: 768px) 100vw, 50vw', className = '', style }) {
   const { id, title, category, location, cover, num, media } = project
-  const hasVideo = media.some(isVideo)
+  const films = media.filter(isVideo).length
+  const photos = media.length - films
+  const badge = [
+    photos > 1 && `${photos} images`,
+    films > 0 && (films === 1 ? 'Film' : `${films} films`),
+  ].filter(Boolean).join(' + ')
   return (
     <Link to={`/work/${id}`} className={`${styles.card} ${className}`} style={style}>
       <div className={styles.frame}>
         <Img item={cover} alt={title} sizes={sizes} className={styles.img} />
         <span className={styles.view} aria-hidden="true">View project</span>
-        {(media.length > 1 || hasVideo) && (
+        {badge && (
           <span className={styles.badge}>
-            {media.length} {media.length === 1 ? 'item' : hasVideo ? 'items' : 'images'}
-            {hasVideo && <span className={styles.play} aria-label="includes video">▶</span>}
+            {badge}
+            {films > 0 && <span className={styles.play} aria-hidden="true">▶</span>}
           </span>
         )}
       </div>

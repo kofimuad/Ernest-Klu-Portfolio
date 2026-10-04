@@ -35,11 +35,18 @@ export function srcSet(item) {
   return widths.map((w) => `${imageUrl(item, w)} ${w}w`).join(', ')
 }
 
+/**
+ * Videos the upload script already encoded for the web (`web: true`) are served
+ * as uploaded: the free plan will not transform videos over 40 MB on the fly.
+ */
 export function videoUrl(item) {
+  if (item.web) return `${BASE}/video/upload/${item.id}.mp4`
   return `${BASE}/video/upload/q_auto,c_limit,w_1920/${item.id}.mp4`
 }
 
+/** Still frame for a video: the uploaded poster image if there is one. */
 export function posterUrl(item, width = 1600) {
+  if (item.poster) return `${BASE}/image/upload/f_auto,q_auto,c_limit,w_${width}/${item.poster}`
   return `${BASE}/video/upload/so_0,f_auto,q_auto,c_limit,w_${width}/${item.id}.jpg`
 }
 

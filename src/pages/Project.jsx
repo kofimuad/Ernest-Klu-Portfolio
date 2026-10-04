@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Img from '@/components/ui/Img'
 import AutoVideo from '@/components/ui/AutoVideo'
@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button'
 import Footer from '@/components/layout/Footer'
 import NotFound from '@/pages/NotFound'
 import { getProject, getNeighbours } from '@/lib/projects'
-import { isVideo, ratio } from '@/lib/media'
+import { isVideo, posterUrl, ratio, videoUrl } from '@/lib/media'
 import { galleryRows } from '@/lib/layout'
 import styles from './Project.module.css'
 
@@ -21,6 +21,7 @@ export default function ProjectRoute() {
 function Project({ id }) {
   const project = getProject(id)
   const [open, setOpen] = useState(null)
+  const [filmPlaying, setFilmPlaying] = useState(false)
 
   const { images, rows } = useMemo(() => {
     if (!project) return { images: [], rows: [] }
@@ -34,14 +35,22 @@ function Project({ id }) {
   const { next } = getNeighbours(id)
   const videos = media.filter(isVideo).length
   const photos = media.length - videos
+  const mediaSummary = [
+    photos && `${photos} ${photos === 1 ? 'image' : 'images'}`,
+    videos && `${videos} ${videos === 1 ? 'film' : 'films'}`,
+  ].filter(Boolean).join(', ')
   const openImage = (item) => setOpen(images.indexOf(item))
 
   return (
     <>
-      <section className={styles.hero}>
-        <button className={styles.heroMedia} onClick={() => !isVideo(cover) && openImage(cover)} aria-label={`Open ${title} gallery`}>
-          <Img item={cover} alt="" sizes="100vw" width={2400} eager className={styles.heroImg} />
-        </button>
+      <section className={`${styles.hero} ${filmPlaying ? styles.heroFilm : ''}`}>
+        {isVideo(cover) ? (
+          <HeroFilm item={cover} title={title} onPlay={() => setFilmPlaying(true)} />
+        ) : (
+          <button className={styles.heroMedia} onClick={() => openImage(cover)} aria-label={`Open ${title} gallery`}>
+            <Img item={cover} alt="" sizes="100vw" width={2400} eager className={styles.heroImg} />
+          </button>
+        )}
         <div className={styles.heroShade} aria-hidden="true" />
         <div className={styles.heroText}>
           <Link to="/work" className={styles.back}>← All work</Link>
@@ -55,13 +64,7 @@ function Project({ id }) {
           <div><dt>Type</dt><dd>{category}</dd></div>
           {location && <div><dt>Location</dt><dd>{location}</dd></div>}
           <div><dt>Scope</dt><dd>{tags.join(', ')}</dd></div>
-          {media.length > 1 && <div>
-            <dt>Media</dt>
-            <dd>
-              {photos} {photos === 1 ? 'image' : 'images'}
-              {videos > 0 && <>, {videos} {videos === 1 ? 'video' : 'videos'}</>}
-            </dd>
-          </div>}
+          {(media.length > 1 || videos > 0) && <div><dt>Media</dt><dd>{mediaSummary}</dd></div>}
         </dl>
         <div className={styles.copy}>
           {description && <p className={styles.desc}>{description}</p>}
@@ -121,6 +124,54 @@ function Project({ id }) {
 
       {open !== null && open >= 0 && (
         <Lightbox items={images} index={open} title={title} onClose={() => setOpen(null)} />
+      )}
+    </>
+  )
+}
+
+/**
+ * Hero for projects whose cover is a film: plays silently in the background,
+ * with a button to restart it with sound and controls. On small screens or
+ * data-saver connections it waits for the button instead of autoplaying.
+ */
+function HeroFilm({ item, title, onPlay }) {
+  const ref = useRef(null)
+  const [withSound, setWithSound] = useState(false)
+  const [autoplay] = useState(() =>
+    !window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 640px)').matches &&
+    !navigator.connection?.saveData
+  )
+
+  const play = () => {
+    const v = ref.current
+    if (!v) return
+    v.muted = false
+    v.loop = false
+    v.currentTime = 0
+    v.play().catch(() => {})
+    setWithSound(true)
+    onPlay()
+  }
+
+  return (
+    <>
+      <video
+        ref={ref}
+        className={styles.heroImg}
+        src={videoUrl(item)}
+        poster={posterUrl(item, 2400)}
+        autoPlay={autoplay}
+        muted={!withSound}
+        loop={!withSound}
+        controls={withSound}
+        playsInline
+        preload={autoplay ? 'auto' : 'none'}
+        aria-label={`${title} film`}
+      />
+      {!withSound && (
+        <button className={styles.playFilm} onClick={play}>
+          <span aria-hidden="true">▶</span> Play film with sound
+        </button>
       )}
     </>
   )
