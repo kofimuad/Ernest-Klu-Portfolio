@@ -1,40 +1,28 @@
+import { Link } from 'react-router-dom'
+import Img from './Img'
+import { isVideo } from '@/lib/media'
 import styles from './ProjectCard.module.css'
 
-export default function ProjectCard({ project, className = '', style = {}, onClick }) {
-  const { title, category, location, image, description, num, behance } = project
-
-  const handleClick = () => {
-    if (onClick) { onClick(); return; }
-    if (behance) window.open(behance, '_blank', 'noopener,noreferrer')
-  }
-
+export default function ProjectCard({ project, sizes = '(max-width: 768px) 100vw, 50vw', className = '', style }) {
+  const { id, title, category, location, cover, num, media } = project
+  const hasVideo = media.some(isVideo)
   return (
-    <div
-      className={`${styles.card} ${className}`}
-      style={style}
-      onClick={handleClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={e => e.key === 'Enter' && handleClick()}
-      aria-label={`View ${title}`}
-    >
-      <div
-        className={styles.image}
-        style={{ backgroundImage: `url('${image}')` }}
-        aria-hidden="true"
-      />
-      <div className={styles.gradient} aria-hidden="true" />
-      {num && <span className={styles.num} aria-hidden="true">{num}</span>}
-      <div className={styles.arrowWrap} aria-hidden="true">
-        <span className={styles.arrow}>→</span>
+    <Link to={`/work/${id}`} className={`${styles.card} ${className}`} style={style}>
+      <div className={styles.frame}>
+        <Img item={cover} alt={title} sizes={sizes} className={styles.img} />
+        <span className={styles.view} aria-hidden="true">View project</span>
+        {(media.length > 1 || hasVideo) && (
+          <span className={styles.badge}>
+            {media.length} {media.length === 1 ? 'item' : hasVideo ? 'items' : 'images'}
+            {hasVideo && <span className={styles.play} aria-label="includes video">▶</span>}
+          </span>
+        )}
       </div>
-      <div className={styles.body}>
-        <div>
-          <p className={styles.category}>{category} · {location}</p>
-          <h3 className={styles.title}>{title}</h3>
-          {description && <p className={styles.desc}>{description}</p>}
-        </div>
+      <div className={styles.caption}>
+        <span className={styles.num}>{num}</span>
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.meta}>{category}{location && <> · {location}</>}</p>
       </div>
-    </div>
+    </Link>
   )
 }

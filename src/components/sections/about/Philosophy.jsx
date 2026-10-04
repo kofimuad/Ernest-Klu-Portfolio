@@ -8,24 +8,24 @@ export default function Philosophy() {
   return (
     <section className={styles.section} aria-labelledby="philosophy-heading">
       <div>
-        <Eyebrow>Philosophy</Eyebrow>
+        <Eyebrow>Approach</Eyebrow>
         <h2 id="philosophy-heading" className={styles.title}>
-          From mathematical models<br />to <em>immersive realities</em>
+          Design for the people<br /><em>who use it</em>
         </h2>
       </div>
       <div className={styles.right}>
         <p className={styles.body}>
-          Architecture that ignores its context produces buildings that feel borrowed.
-          From the acoustic properties of a diagnostic wing in Swedru to the rooftop
-          sightlines of a bar in East Legon — the details are where architecture
-          lives or dies.
+          A building has to suit its site, its climate and the people inside it.
+          In a clinic in Swedru that meant consulting rooms where conversations
+          stay private. In a lecture studio at KNUST it meant walls that stop
+          echo before it reaches the microphone.
         </p>
         <p className={styles.body}>
-          The dual background means Ernest approaches every spatial problem from two
-          angles simultaneously — form and sensation.
+          Ernest works from the brief and the site first, and keeps the drawings
+          practical enough to price and build.
         </p>
         <Button onClick={() => navigate('/contact')} className={styles.btn}>
-          Work With Ernest
+          Work with Ernest
         </Button>
       </div>
     </section>

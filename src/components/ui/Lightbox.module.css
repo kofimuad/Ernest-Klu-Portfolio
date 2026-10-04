@@ -1,0 +1,86 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #0b0b0b;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  animation: fade 250ms ease both;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem var(--page-px);
+  color: var(--color-white);
+}
+.title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+}
+.count span { color: rgba(255, 255, 255, 0.4); }
+.close {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 100px;
+  padding: 0.6rem 1.2rem;
+  transition: background var(--transition-base), color var(--transition-base);
+}
+.close:hover { background: var(--color-white); color: var(--color-ink); }
+
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(1rem, 6vw, 6rem) 2rem;
+  min-height: 0;
+}
+.img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  animation: imgIn 400ms var(--ease-out) both;
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+  font-size: 1.1rem;
+  background: rgba(16, 16, 16, 0.5);
+  transition: background var(--transition-base), color var(--transition-base);
+}
+.nav:hover { background: var(--color-white); color: var(--color-ink); }
+.prev { left: 1.25rem; }
+.next { right: 1.25rem; }
+
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes imgIn { from { opacity: 0; transform: scale(0.985); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 640px) {
+  .nav { top: auto; bottom: 1.25rem; transform: none; width: 44px; height: 44px; }
+  .stage { padding-bottom: 5rem; }
+}

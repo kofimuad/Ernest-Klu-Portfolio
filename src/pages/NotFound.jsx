@@ -10,7 +10,7 @@ export default function NotFound() {
       <div className={styles.wrap}>
         <p className={styles.code}>404</p>
         <h1 className={styles.title}>Page not found</h1>
-        <p className={styles.desc}>The page you're looking for doesn't exist.</p>
+        <p className={styles.desc}>That page doesn&apos;t exist, or it has moved.</p>
         <Button onClick={() => navigate('/')}>Back to Home</Button>
       </div>
       <Footer />

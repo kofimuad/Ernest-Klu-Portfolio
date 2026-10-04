@@ -1,19 +1,19 @@
 /* ─────────────────────────────────────────
-   Design Tokens — Ernest Klu Portfolio
+   Design tokens: Ernest Klu Portfolio
    Palette: #101010 / #6E8385 / #FAFAFA / #FFFFFF
 ───────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
   /* ── Palette ── */
-  --color-cream:      #FAFAFA;        /* light gray — page background  */
+  --color-cream:      #FAFAFA;        /* light gray, page background   */
   --color-cream-mid:  #F0F2F2;        /* tinted surface                */
   --color-stone:      #C2CBCC;        /* muted divider / placeholder   */
-  --color-stone-dk:   #6E8385;        /* Auro Metal Saurus — secondary */
+  --color-stone-dk:   #6E8385;        /* Auro Metal Saurus, secondary  */
   --color-moss:       #6E8385;        /* primary accent                */
   --color-moss-light: #8AA3A5;        /* lighter accent                */
   --color-moss-dim:   #A5BABB;        /* very light accent             */
-  --color-ink:        #101010;        /* Black — primary text          */
+  --color-ink:        #101010;        /* Black, primary text           */
   --color-white:      #FFFFFF;
   --color-neutral:    #F0F2F2;
   --color-border:     rgba(110, 131, 133, 0.15);
@@ -42,6 +42,7 @@
   --transition-base:  250ms ease;
   --transition-slow:  400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --transition-image: 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out:         cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ── Reset ── */

@@ -1,6 +1,6 @@
-.split { display: grid; grid-template-columns: 380px 1fr; min-height: 65vh; border-bottom: 1px solid rgba(92,98,72,.1); }
+.split { display: grid; grid-template-columns: minmax(320px, 2fr) 3fr; min-height: 65vh; border-bottom: 1px solid rgba(92,98,72,.1); }
 .photo { position: relative; overflow: hidden; background: var(--color-cream-mid); min-height: 400px; }
-.photoImg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80') center 15% / cover; filter: grayscale(8%) contrast(1.05); }
+.photoImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
 .content { padding: calc(var(--nav-height) + 3rem) var(--page-px) 4.5rem 3.5rem; display: flex; flex-direction: column; justify-content: center; background: var(--color-white); }
 .title { font-family: var(--font-serif); font-size: clamp(2.2rem,3.5vw,3rem); font-weight: 700; line-height: 1.1; color: var(--color-ink); margin-bottom: 1.5rem; }
 .title em { font-style: italic; color: var(--color-moss); }
