@@ -105,6 +105,24 @@ export const PROJECTS = [
     featured: true,
   },
   {
+    id: 'hermanos-jungle-east-legon',
+    title: 'Hermanos Jungle',
+    category: 'Recreational and Sports',
+    location: 'East Legon',
+    tags: ['Architecture'],
+    description: '',
+    featured: true,
+  },
+  {
+    id: 'retreat-centre-pokuase-hills',
+    title: 'Retreat Centre',
+    category: 'Religious',
+    location: 'Pokuase Hills',
+    tags: ['Architecture'],
+    description: '',
+    featured: true,
+  },
+  {
     id: 'regal-court',
     title: 'Regal Court',
     category: 'Residential',
@@ -233,7 +251,7 @@ export const PROJECTS = [
 /** Order of category chips on the Work page. Categories with no projects are hidden. */
 export const CATEGORY_ORDER = [
   'Residential', 'Commercial', 'Hospitality', 'Healthcare',
-  'Educational', 'Religious', 'Agricultural',
+  'Educational', 'Religious', 'Recreational and Sports', 'Agricultural',
 ]
 
 /** Discipline filters, matched against project tags. */
