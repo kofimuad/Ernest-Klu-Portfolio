@@ -4,14 +4,23 @@ import { ABOUT_TAGS } from '@/data/content'
 import { PROJECTS, PORTRAIT } from '@/lib/projects'
 import styles from './AboutHero.module.css'
 
-const photo = PORTRAIT || (PROJECTS.find((p) => p.id === 'idl-centre-knust') || PROJECTS[0])?.cover
+// Background: a project image. Portrait: an uploaded "Portrait" folder if there is one, else the bundled photo.
+const backdrop = (PROJECTS.find((p) => p.id === 'idl-centre-knust') || PROJECTS[0])?.cover
+const portrait = PORTRAIT || '/images/ernest-klu.webp'
 
 export default function AboutHero() {
   return (
     <>
       <div className={styles.split}>
         <div className={styles.photo}>
-          <Img item={photo} alt={PORTRAIT ? 'Ernest Klu' : ''} sizes="(max-width: 900px) 100vw, 40vw" width={1200} eager className={styles.photoImg} />
+          <Img item={backdrop} alt="" sizes="(max-width: 900px) 100vw, 40vw" width={1200} eager className={styles.photoImg} />
+          <figure className={styles.portrait}>
+            <Img item={portrait} alt="Ernest Klu" sizes="200px" width={480} eager className={styles.portraitImg} />
+            <figcaption className={styles.portraitCap}>
+              <span className={styles.portraitName}>Ernest Klu</span>
+              <span className={styles.portraitRole}>Architect · Sound Engineer</span>
+            </figcaption>
+          </figure>
         </div>
         <div className={styles.content}>
           <Eyebrow>About Ernest</Eyebrow>

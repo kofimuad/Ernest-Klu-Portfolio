@@ -13,7 +13,7 @@ export const SITE = {
   name: 'Ernest Klu',
   tagline: 'Architect & Sound Engineer',
   location: 'Accra, Ghana',
-  email: 'ernest@ernestklu.com',
+  email: 'airnestklu@gmail.com',
   availability: 'Taking on new commissions',
   responseTime: 'Within 24 hours on weekdays',
   social: {
@@ -87,10 +87,12 @@ export const PROJECTS = [
   {
     id: 'akwaaba-rooftop-madina',
     title: 'Akwaaba Rooftop',
-    category: 'Commercial',
+    category: 'Hospitality',
     location: 'Madina',
     tags: ['Architecture'],
-    description: 'A rooftop venue in Madina, photographed after completion.',
+    description: 'A rooftop restaurant in Madina with an open terrace looking out over the city. The photographs show the finished space.',
+    image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/246d0c245063029.69a59eba15cd4.jpg',
+    behance: 'https://www.behance.net/gallery/245063029/ROOF-TOP-RESTAURANT',
     featured: true,
   },
   {
@@ -100,17 +102,6 @@ export const PROJECTS = [
     location: 'KNUST, Kumasi',
     tags: ['Architecture', 'Interiors', 'Sound'],
     description: 'Interior and acoustic design for a lecture recording studio at the Institute of Distance Learning, KNUST. Angled wall panels break up reflections so lectures record cleanly.',
-    featured: true,
-  },
-  {
-    id: 'rooftop-restaurant',
-    title: 'Roof Top Restaurant',
-    category: 'Hospitality',
-    location: 'Accra',
-    tags: ['Architecture'],
-    description: 'A rooftop restaurant with an open terrace looking out over the city.',
-    image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/246d0c245063029.69a59eba15cd4.jpg',
-    behance: 'https://www.behance.net/gallery/245063029/ROOF-TOP-RESTAURANT',
     featured: true,
   },
   {
