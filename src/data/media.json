@@ -7,6 +7,36 @@
       "category": "Commercial",
       "items": [
         {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/1-1-photo",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/1-2-photo",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/1-4-photo",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/1-9-photo",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/1-14-photo",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
           "id": "ernest-klu/projects/akwaaba-rooftop-madina/roof-top-restaurant",
           "type": "video",
           "w": 1920,
@@ -94,6 +124,87 @@
           "duration": 22,
           "web": true,
           "poster": "ernest-klu/projects/the-brick-house/anime-poster"
+        }
+      ]
+    },
+    "farmhouse-sogakope": {
+      "title": "Farmhouse",
+      "location": "Sogakope",
+      "category": "Agricultural",
+      "items": [
+        {
+          "id": "ernest-klu/projects/farmhouse-sogakope/farmhouse-for-asiwome-3d-view-opt-2-1",
+          "type": "image",
+          "w": 1749,
+          "h": 891
+        },
+        {
+          "id": "ernest-klu/projects/farmhouse-sogakope/farmhouse-for-asiwome-3d-view-opt-2-2",
+          "type": "image",
+          "w": 1879,
+          "h": 966
+        }
+      ]
+    },
+    "pig-sty-bortianor": {
+      "title": "Pig Sty",
+      "location": "Bortianor",
+      "category": "Agricultural",
+      "items": [
+        {
+          "id": "ernest-klu/projects/pig-sty-bortianor/pig-sty-3d-view-3d-copy-1-copy-1",
+          "type": "image",
+          "w": 6428,
+          "h": 3617
+        },
+        {
+          "id": "ernest-klu/projects/pig-sty-bortianor/pig-sty-3d-view-3d-copy-1-copy-2",
+          "type": "image",
+          "w": 6637,
+          "h": 5024
+        },
+        {
+          "id": "ernest-klu/projects/pig-sty-bortianor/pig-sty-new-3d-view-3d-copy-1-copy-2",
+          "type": "image",
+          "w": 6589,
+          "h": 4265
+        }
+      ]
+    },
+    "idl-centre-knust": {
+      "title": "IDL Centre",
+      "location": "KNUST",
+      "category": "Educational",
+      "items": [
+        {
+          "id": "ernest-klu/projects/idl-centre-knust/1",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/idl-centre-knust/2",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/idl-centre-knust/3",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/idl-centre-knust/4",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/idl-centre-knust/5",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
         }
       ]
     }
