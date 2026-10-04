@@ -1,0 +1,212 @@
+{
+  "cloudName": "unmfwxkr",
+  "projects": {
+    "akwaaba-rooftop-madina": {
+      "title": "Akwaaba Rooftop",
+      "location": "Madina",
+      "category": "Commercial",
+      "items": [
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/1-1-photo",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/1-2-photo",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/1-4-photo",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/1-9-photo",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/1-14-photo",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/akwaaba-rooftop-madina/roof-top-restaurant",
+          "type": "video",
+          "w": 1920,
+          "h": 1080,
+          "duration": 73,
+          "web": true,
+          "poster": "ernest-klu/projects/akwaaba-rooftop-madina/roof-top-restaurant-poster"
+        }
+      ]
+    },
+    "hermanos-jungle-east-legon": {
+      "title": "Hermanos Jungle",
+      "location": "East Legon",
+      "category": "Recreational and Sports",
+      "items": [
+        {
+          "id": "ernest-klu/projects/hermanos-jungle-east-legon/hermanos-jungle",
+          "type": "video",
+          "w": 1280,
+          "h": 720,
+          "duration": 76,
+          "web": true,
+          "poster": "ernest-klu/projects/hermanos-jungle-east-legon/hermanos-jungle-poster"
+        }
+      ]
+    },
+    "kotoko-hq": {
+      "title": "Kotoko HQ",
+      "location": "",
+      "category": "Recreational and Sports",
+      "items": [
+        {
+          "id": "ernest-klu/projects/kotoko-hq/kotoko-final",
+          "type": "video",
+          "w": 1280,
+          "h": 720,
+          "duration": 99,
+          "web": true,
+          "poster": "ernest-klu/projects/kotoko-hq/kotoko-final-poster"
+        }
+      ]
+    },
+    "retreat-centre-pokuase-hills": {
+      "title": "Retreat Centre",
+      "location": "Pokuase Hills",
+      "category": "Religious",
+      "items": [
+        {
+          "id": "ernest-klu/projects/retreat-centre-pokuase-hills/final-animation",
+          "type": "video",
+          "w": 1920,
+          "h": 1080,
+          "duration": 38,
+          "web": true,
+          "poster": "ernest-klu/projects/retreat-centre-pokuase-hills/final-animation-poster"
+        }
+      ]
+    },
+    "riverstone-homes-east-legon": {
+      "title": "Riverstone Homes",
+      "location": "East Legon",
+      "category": "Residential",
+      "items": [
+        {
+          "id": "ernest-klu/projects/riverstone-homes-east-legon/animation-final",
+          "type": "video",
+          "w": 1280,
+          "h": 720,
+          "duration": 42,
+          "web": true,
+          "poster": "ernest-klu/projects/riverstone-homes-east-legon/animation-final-poster"
+        }
+      ]
+    },
+    "the-brick-house": {
+      "title": "The Brick House",
+      "location": "",
+      "category": "Residential",
+      "items": [
+        {
+          "id": "ernest-klu/projects/the-brick-house/anime",
+          "type": "video",
+          "w": 1280,
+          "h": 720,
+          "duration": 22,
+          "web": true,
+          "poster": "ernest-klu/projects/the-brick-house/anime-poster"
+        }
+      ]
+    },
+    "farmhouse-sogakope": {
+      "title": "Farmhouse",
+      "location": "Sogakope",
+      "category": "Agricultural",
+      "items": [
+        {
+          "id": "ernest-klu/projects/farmhouse-sogakope/farmhouse-for-asiwome-3d-view-opt-2-1",
+          "type": "image",
+          "w": 1749,
+          "h": 891
+        },
+        {
+          "id": "ernest-klu/projects/farmhouse-sogakope/farmhouse-for-asiwome-3d-view-opt-2-2",
+          "type": "image",
+          "w": 1879,
+          "h": 966
+        }
+      ]
+    },
+    "pig-sty-bortianor": {
+      "title": "Pig Sty",
+      "location": "Bortianor",
+      "category": "Agricultural",
+      "items": [
+        {
+          "id": "ernest-klu/projects/pig-sty-bortianor/pig-sty-3d-view-3d-copy-1-copy-1",
+          "type": "image",
+          "w": 6428,
+          "h": 3617
+        },
+        {
+          "id": "ernest-klu/projects/pig-sty-bortianor/pig-sty-3d-view-3d-copy-1-copy-2",
+          "type": "image",
+          "w": 6637,
+          "h": 5024
+        },
+        {
+          "id": "ernest-klu/projects/pig-sty-bortianor/pig-sty-new-3d-view-3d-copy-1-copy-2",
+          "type": "image",
+          "w": 6589,
+          "h": 4265
+        }
+      ]
+    },
+    "idl-centre-knust": {
+      "title": "IDL Centre",
+      "location": "KNUST",
+      "category": "Educational",
+      "items": [
+        {
+          "id": "ernest-klu/projects/idl-centre-knust/1",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/idl-centre-knust/2",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/idl-centre-knust/3",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/idl-centre-knust/4",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        },
+        {
+          "id": "ernest-klu/projects/idl-centre-knust/5",
+          "type": "image",
+          "w": 3840,
+          "h": 2160
+        }
+      ]
+    }
+  }
+}

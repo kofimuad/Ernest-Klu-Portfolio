@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { HouseIcon, SoundIcon } from '@/components/ui/Icons'
 import { SERVICES } from '@/data/content'
@@ -13,12 +12,12 @@ export default function Services() {
         <div>
           <Eyebrow>Services</Eyebrow>
           <h2 id="services-heading" className={styles.title}>
-            Two disciplines.<br /><em>One vision.</em>
+            Architecture and<br /><em>acoustics</em>
           </h2>
         </div>
         <p className={styles.desc}>
-          Ernest combines architectural precision with acoustic intelligence —
-          designing spaces that look exceptional and sound unforgettable.
+          Most projects need one of these. Some need both: a church that has to
+          carry a voice, or a studio that has to keep the street out.
         </p>
       </div>
 

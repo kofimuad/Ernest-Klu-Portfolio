@@ -1,50 +1,42 @@
-import { useState, useMemo, useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import WorkHeader  from '@/components/sections/work/WorkHeader'
 import WorkFilters from '@/components/sections/work/WorkFilters'
 import WorkGrid    from '@/components/sections/work/WorkGrid'
-import Button      from '@/components/ui/Button'
+import WorkList    from '@/components/sections/work/WorkList'
+import ClosingCTA  from '@/components/sections/home/FullbleedCTA'
 import Footer      from '@/components/layout/Footer'
-import { PROJECTS, WORK_FILTERS } from '@/data/content'
-import styles from './Work.module.css'
+import { PROJECTS, FILTERS, matchesFilter } from '@/lib/projects'
+
+const VIEW_KEY = 'ek-work-view'
+
+function readView() {
+  try { return localStorage.getItem(VIEW_KEY) === 'list' ? 'list' : 'grid' } catch { return 'grid' }
+}
 
 export default function Work() {
-  const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [view, setView] = useState(readView)
 
-  const getInitialFilter = () => {
-    const param = searchParams.get('filter')
-    if (param && WORK_FILTERS.includes(param)) return param
-    return 'All Work'
+  const param = searchParams.get('filter')
+  const active = FILTERS.includes(param) ? param : 'All'
+
+  const filtered = useMemo(() => PROJECTS.filter((p) => matchesFilter(p, active)), [active])
+
+  const setFilter = (f) => setSearchParams(f === 'All' ? {} : { filter: f }, { replace: true })
+  const changeView = (v) => {
+    setView(v)
+    try { localStorage.setItem(VIEW_KEY, v) } catch { /* private mode */ }
   }
-
-  const [activeFilter, setActiveFilter] = useState(getInitialFilter)
-
-  // Sync filter when URL param changes (e.g. nav link clicked again)
-  useEffect(() => {
-    const param = searchParams.get('filter')
-    if (param && WORK_FILTERS.includes(param)) setActiveFilter(param)
-    else if (!param) setActiveFilter('All Work')
-  }, [searchParams])
-
-  const filtered = useMemo(() => {
-    if (activeFilter === 'All Work') return PROJECTS
-    return PROJECTS.filter((p) =>
-      p.tags.some((t) => t.toLowerCase() === activeFilter.toLowerCase()) ||
-      p.category.toLowerCase() === activeFilter.toLowerCase()
-    )
-  }, [activeFilter])
 
   return (
     <>
-      <WorkHeader />
-      <WorkFilters active={activeFilter} onChange={setActiveFilter} />
-      <WorkGrid projects={filtered} />
-      <div className={styles.cta}>
-        <h2 className={styles.ctaTitle}>Have a project in <em>mind?</em></h2>
-        <p className={styles.ctaDesc}>Let&apos;s discuss how Ernest can bring it to life.</p>
-        <Button onClick={() => navigate('/contact')}>Hire Ernest</Button>
-      </div>
+      <WorkHeader count={PROJECTS.length} view={view} onViewChange={changeView} />
+      <WorkFilters active={active} onChange={setFilter} />
+      {view === 'grid'
+        ? <WorkGrid key={active} projects={filtered} />
+        : <WorkList key={active} projects={filtered} />}
+      <ClosingCTA />
       <Footer />
     </>
   )

@@ -48,7 +48,7 @@
   transform: translateY(-1px);
 }
 
-/* Light — solid white, for dark-background CTAs */
+/* Light: solid white, for dark-background CTAs */
 .light {
   background: var(--color-white);
   color: var(--color-ink);

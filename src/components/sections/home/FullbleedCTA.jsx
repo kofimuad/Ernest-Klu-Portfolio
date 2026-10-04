@@ -1,31 +1,32 @@
 import { useNavigate } from 'react-router-dom'
 import Eyebrow from '@/components/ui/Eyebrow'
 import Button from '@/components/ui/Button'
+import Img from '@/components/ui/Img'
+import { PROJECTS } from '@/lib/projects'
 import styles from './FullbleedCTA.module.css'
+
+const bg = PROJECTS.find((p) => p.id === 'apartments-east-legon-hills') || PROJECTS[0]
 
 export default function FullbleedCTA() {
   const navigate = useNavigate()
   return (
     <div className={styles.wrap}>
+      {bg && <Img item={bg.cover} alt="" sizes="100vw" width={1600} className={styles.bg} />}
       <div className={styles.content}>
         <div className={styles.left}>
-          <Eyebrow className={styles.eyebrow}>Get Started</Eyebrow>
+          <Eyebrow className={styles.eyebrow}>Start a project</Eyebrow>
           <h2 className={styles.title}>
-            Ready to bring your<br />project <em>to life?</em>
+            Have a site, a brief<br />or <em>just an idea?</em>
           </h2>
           <p className={styles.sub}>
-            Whether you need a building designed, a studio planned, or a space
-            that feels and sounds right — let&apos;s talk.
+            Send Ernest a note with what you have so far. The first
+            conversation is free.
           </p>
           <div className={styles.btns}>
-            <Button variant="light" onClick={() => navigate('/contact')}>Hire Ernest</Button>
+            <Button variant="light" onClick={() => navigate('/contact')}>Get in touch</Button>
             <Button variant="ghost-light" onClick={() => navigate('/work')}>View Projects</Button>
           </div>
         </div>
-        <p className={styles.quote}>
-          &ldquo;Architecture is not about the walls we build, but the silence we
-          capture within them.&rdquo;
-        </p>
       </div>
     </div>
   )

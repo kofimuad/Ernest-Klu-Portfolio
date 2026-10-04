@@ -7,14 +7,14 @@ export default function Process() {
     <section className={styles.section} aria-labelledby="process-heading">
       <div className={styles.intro}>
         <div>
-          <Eyebrow>How It Works</Eyebrow>
+          <Eyebrow>Process</Eyebrow>
           <h2 id="process-heading" className={styles.title}>
-            A clear process.<br /><em>Zero surprises.</em>
+            How a project<br /><em>runs</em>
           </h2>
         </div>
         <p className={styles.desc}>
-          Ernest's approach is structured enough to give you confidence at every
-          stage, and flexible enough to respond to the demands of your project.
+          Four stages from the first call to handover. You see and sign off the
+          design at each one before work moves on.
         </p>
       </div>
       <ol className={styles.grid} role="list">

@@ -1,98 +1,71 @@
-import { useRef, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { PROJECTS } from '@/data/content'
+import { useRef } from 'react'
+import { Link } from 'react-router-dom'
+import Img from '@/components/ui/Img'
+import Reveal from '@/components/ui/Reveal'
+import { PROJECTS } from '@/lib/projects'
 import styles from './ProjectStrip.module.css'
 
-export default function ProjectStrip() {
-  const navigate = useNavigate()
-  const trackRef = useRef(null)
-  const isDragging = useRef(false)
-  const startX = useRef(0)
-  const scrollLeft = useRef(0)
-  const [labelVisible, setLabelVisible] = useState(false)
-  const labelRef = useRef(null)
+const strip = PROJECTS.filter((p) => !p.featured).slice(0, 10)
 
-  useEffect(() => {
-    const el = labelRef.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setLabelVisible(true); obs.disconnect() } },
-      { threshold: 0.3 }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
+export default function ProjectStrip() {
+  const trackRef = useRef(null)
+  const drag = useRef({ down: false, x: 0, left: 0, moved: false })
 
   const onMouseDown = (e) => {
-    isDragging.current = true
-    startX.current = e.pageX - trackRef.current.offsetLeft
-    scrollLeft.current = trackRef.current.scrollLeft
-    trackRef.current.style.cursor = 'grabbing'
+    const el = trackRef.current
+    drag.current = { down: true, x: e.pageX, left: el.scrollLeft, moved: false }
+    el.classList.add(styles.grabbing)
   }
   const onMouseMove = (e) => {
-    if (!isDragging.current) return
-    e.preventDefault()
-    const x = e.pageX - trackRef.current.offsetLeft
-    const walk = (x - startX.current) * 1.4
-    trackRef.current.scrollLeft = scrollLeft.current - walk
+    const d = drag.current
+    if (!d.down) return
+    const dx = e.pageX - d.x
+    if (Math.abs(dx) > 5) d.moved = true
+    trackRef.current.scrollLeft = d.left - dx * 1.3
   }
-  const onMouseUp = () => {
-    isDragging.current = false
-    if (trackRef.current) trackRef.current.style.cursor = 'grab'
+  const end = () => {
+    drag.current.down = false
+    trackRef.current?.classList.remove(styles.grabbing)
+  }
+  // A drag should not open the project it ended on.
+  const onClickCapture = (e) => {
+    if (drag.current.moved) { e.preventDefault(); e.stopPropagation() }
   }
 
-  const strip = PROJECTS.slice(0, 8)
+  if (!strip.length) return null
 
   return (
-    <section className={styles.root} aria-label="Project filmstrip">
-      {/* Section label */}
-      <div
-        ref={labelRef}
-        className={[styles.label, 'reveal', labelVisible ? 'visible' : ''].join(' ')}
-        aria-hidden="true"
-      >
-        <span className={styles.labelText}>Drag to explore</span>
-        <span className={styles.labelLine} />
-      </div>
+    <section className={styles.root} aria-labelledby="strip-heading">
+      <Reveal className={styles.label}>
+        <h2 id="strip-heading" className={styles.heading}>More work</h2>
+        <span className={styles.labelText}>Drag or scroll</span>
+      </Reveal>
 
-      {/* Scrollable strip */}
       <div
         ref={trackRef}
         className={styles.track}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseUp}
+        onMouseUp={end}
+        onMouseLeave={end}
+        onClickCapture={onClickCapture}
+        onDragStart={(e) => e.preventDefault()}
       >
-        {strip.map((p, i) => (
-          <article
-            key={p.id}
-            className={styles.item}
-            onClick={() => p.behance && window.open(p.behance, '_blank', 'noopener,noreferrer')}
-            aria-label={p.title}
-          >
-            <div
-              className={styles.img}
-              style={{ backgroundImage: `url('${p.image}')` }}
-              aria-hidden="true"
-            />
-            <div className={styles.overlay} aria-hidden="true" />
-            <div className={styles.meta}>
-              <span className={styles.metaNum}>{p.num}</span>
-              <h3 className={styles.metaTitle}>{p.title}</h3>
-              <p className={styles.metaCat}>{p.category} · {p.location}</p>
-            </div>
-            <span className={styles.index} aria-hidden="true">0{i + 1}</span>
-          </article>
+        {strip.map((p) => (
+          <Link key={p.id} to={`/work/${p.id}`} className={styles.item}>
+            <Img item={p.cover} alt="" sizes="(max-width: 768px) 70vw, 30vw" width={1200} className={styles.img} />
+            <span className={styles.overlay} aria-hidden="true" />
+            <span className={styles.meta}>
+              <span className={styles.metaCat}>{p.category} · {p.location}</span>
+              <span className={styles.metaTitle}>{p.title}</span>
+            </span>
+          </Link>
         ))}
 
-        {/* "See all" cap */}
-        <div className={styles.seeAll} onClick={() => navigate('/work')}>
-          <span className={styles.seeAllInner}>
-            <span className={styles.seeAllLabel}>View all<br />projects</span>
-            <span className={styles.seeAllArrow}>→</span>
-          </span>
-        </div>
+        <Link to="/work" className={styles.seeAll}>
+          <span className={styles.seeAllLabel}>All<br />projects</span>
+          <span className={styles.seeAllArrow} aria-hidden="true">→</span>
+        </Link>
       </div>
     </section>
   )

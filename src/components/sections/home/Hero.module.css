@@ -1,7 +1,4 @@
-/* ─────────────────────────────────────────
-   Hero — full-screen editorial split
-   Left: content panel  |  Right: image panel
-───────────────────────────────────────── */
+/* Hero: full-screen split. Left: copy. Right: featured project slideshow. */
 
 .hero {
   display: grid;
@@ -113,85 +110,100 @@
   z-index: 3;
 }
 
-.imageInner {
+.slide {
   position: absolute;
   inset: 0;
-  background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/2f091f245060857.69a596117b0b2.jpg');
-  background-size: cover;
-  background-position: center;
-  filter: contrast(1.05) brightness(0.86);
-  transform: scale(1.04);
-  transition: transform 12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+  transition: opacity 1.4s ease;
 }
-.hero:hover .imageInner { transform: scale(1); }
+.slideOn { opacity: 1; z-index: 1; }
+.slideImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
+  filter: brightness(0.9);
+}
+.slideOn .slideImg {
+  animation: drift 9s linear both;
+}
+@keyframes drift {
+  from { transform: scale(1.1); }
+  to   { transform: scale(1.0); }
+}
 
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to left,
-    rgba(15, 15, 10, 0.08) 0%,
-    rgba(15, 15, 10, 0.32) 100%
-  );
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.65) 0%, rgba(10, 10, 10, 0) 45%);
 }
 
 .imageCaption {
   position: absolute;
+  z-index: 4;
   bottom: var(--space-8);
-  right: var(--space-6);
-  text-align: right;
-  animation: fadeUp 0.8s ease 0.9s both;
+  left: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: var(--color-white);
+  animation: fadeUp 0.8s var(--ease-out) both;
 }
 
 .captionName {
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: 700;
-  color: var(--color-white);
-  line-height: 1.2;
+  line-height: 1.15;
 }
+.captionName span { display: inline-block; transition: transform var(--transition-base); }
+.imageCaption:hover .captionName span { transform: translateX(6px); }
 
 .captionRole {
   font-size: 0.5625rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(245, 242, 236, 0.6);
-  margin-top: 0.3rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-/* ── Scroll indicator ── */
-.scrollIndicator {
+/* ── Slide progress ── */
+.dots {
   position: absolute;
-  bottom: var(--space-8);
-  left: 50%;
-  transform: translateX(-50%);
+  z-index: 4;
+  right: var(--space-6);
+  bottom: calc(var(--space-8) + 0.4rem);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 0.5rem;
-  animation: fadeUp 0.8s ease 1.1s both;
-  z-index: 2;
 }
-.scrollIndicatorLine {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
+.dot {
+  width: 36px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
-.scrollIndicatorLabel {
-  font-size: 0.4375rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
-  writing-mode: horizontal-tb;
+.dot::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
 }
-
-@keyframes scrollPulse {
-  0%, 100% { transform: scaleY(1); opacity: 0.5; }
-  50%       { transform: scaleY(1.3); opacity: 1; }
+.dot span {
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--color-white);
+  transform: scaleX(0);
+  transform-origin: left;
 }
+.dotOn span { animation: progress linear both; }
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 /* ── Keyframe ── */
 @keyframes fadeUp {
@@ -214,7 +226,8 @@
     font-size: clamp(2.4rem, 7vw, 3.2rem);
   }
   .sub { max-width: 100%; }
-  .imageCaption { right: 1.5rem; bottom: 1.5rem; }
+  .imageCaption { left: 1.5rem; bottom: 1.5rem; }
+  .dots { right: 1.5rem; bottom: 1.9rem; }
 }
 
 @media (max-width: 480px) {

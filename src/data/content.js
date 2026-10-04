@@ -1,15 +1,20 @@
 /**
- * Ernest Klu Portfolio — Content Data
- * Single source of truth for all copy and project data.
- * Swap these values when real assets are ready.
+ * Ernest Klu Portfolio: content data.
+ * Single source of truth for site copy and project details.
+ *
+ * Project photos and videos come from Cloudinary via src/data/media.json,
+ * which `npm run media:upload` generates. A project's `id` must match the
+ * slug of its media folder (e.g. "Akwaaba Rooftop- Madina" -> akwaaba-rooftop-madina).
+ * `image` is a fallback used until a project has media in Cloudinary.
+ * Projects with neither are hidden.
  */
 
 export const SITE = {
   name: 'Ernest Klu',
   tagline: 'Architect & Sound Engineer',
   location: 'Accra, Ghana',
-  email: 'ernest@ernestklu.com',
-  availability: 'Open for Freelance Commissions',
+  email: 'airnestklu@gmail.com',
+  availability: 'Taking on new commissions',
   responseTime: 'Within 24 hours on weekdays',
   social: {
     behance:   'https://www.behance.net/ernest_klu',
@@ -21,7 +26,7 @@ export const SITE = {
 export const NAV_LINKS = [
   { label: 'Home',    path: '/' },
   {
-    label: 'Portfolio',
+    label: 'Work',
     path:  '/work',
     children: [
       { label: 'Architecture',      path: '/work?filter=Architecture' },
@@ -32,32 +37,19 @@ export const NAV_LINKS = [
   { label: 'Contact', path: '/contact' },
 ]
 
-export const STATS = [
-  { value: '12',  label: 'Projects' },
-  { value: '2',   label: 'Disciplines' },
-  { value: '5+',  label: 'Years' },
-]
-
-export const TRUST_ITEMS = [
-  { value: '12',  label: 'Completed Projects' },
-  { value: '2',   label: 'Disciplines Combined' },
-  { value: '5+',  label: 'Years of Practice' },
-  { value: 'GH',  label: 'Based in Ghana' },
-]
-
 export const SERVICES = [
   {
     id: 'architecture',
     num: '01',
-    title: 'Architecture & Spatial Logic',
+    title: 'Architecture',
     variant: 'dark',
     icon: 'house',
     items: [
-      'Residential Design',
-      'Commercial Buildings',
-      'Interior Architecture',
-      'Renovations & Extensions',
-      'Concept Development',
+      'Homes and apartments',
+      'Commercial and hospitality buildings',
+      'Schools, churches and civic buildings',
+      'Farm buildings',
+      'Interiors, renovations and extensions',
     ],
   },
   {
@@ -67,256 +59,256 @@ export const SERVICES = [
     variant: 'light',
     icon: 'sound',
     items: [
-      'Recording Studio Design',
-      'Acoustic Planning & Analysis',
-      'Live Sound Systems',
-      'Home Theatre Acoustics',
-      'Audio Consultation',
+      'Recording and lecture studios',
+      'Acoustic treatment for halls and churches',
+      'Live sound systems',
+      'Home theatres',
+      'Audio consultation',
     ],
   },
 ]
 
+/**
+ * category: drives the filter chips on the Work page.
+ * tags: discipline filters used by the nav (Architecture, Interiors, Sound).
+ */
 export const PROJECTS = [
   {
     id: 'grand-haven',
     title: 'The Grand Haven',
     category: 'Residential',
     location: 'East Legon',
-    tags: ['Architecture', 'Residential'],
-    description: 'Luxury residence with open-plan interiors and a considered material palette responding to the East Legon context.',
+    tags: ['Architecture'],
+    description: 'A private residence in East Legon with open-plan living spaces arranged around the main family rooms.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/2f091f245060857.69a596117b0b2.jpg',
     behance: 'https://www.behance.net/gallery/245060857/THE-GRAND-HAVEN-EAST-LEGON',
     featured: true,
-    num: '01',
   },
   {
-    id: 'rooftop-restaurant',
-    title: 'Roof Top Restaurant',
+    id: 'akwaaba-rooftop-madina',
+    title: 'Akwaaba Rooftop',
     category: 'Hospitality',
-    location: 'Accra',
-    tags: ['Architecture', 'Commercial'],
-    description: 'Elevated dining experience with panoramic city views, deliberate acoustic planning, and outdoor terrace design.',
+    location: 'Madina',
+    tags: ['Architecture'],
+    description: 'A rooftop restaurant in Madina with an open terrace looking out over the city. The photographs show the finished space.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/246d0c245063029.69a59eba15cd4.jpg',
     behance: 'https://www.behance.net/gallery/245063029/ROOF-TOP-RESTAURANT',
     featured: true,
-    num: '02',
+  },
+  {
+    id: 'idl-centre-knust',
+    title: 'IDL Centre',
+    category: 'Educational',
+    location: 'KNUST, Kumasi',
+    tags: ['Architecture', 'Interiors', 'Sound'],
+    description: 'Interior and acoustic design for a lecture recording studio at the Institute of Distance Learning, KNUST. Angled wall panels break up reflections so lectures record cleanly.',
+    featured: true,
+  },
+  {
+    id: 'hermanos-jungle-east-legon',
+    title: 'Hermanos Jungle',
+    category: 'Recreational and Sports',
+    location: 'East Legon',
+    tags: ['Architecture'],
+    description: '',
+    featured: true,
+  },
+  {
+    id: 'retreat-centre-pokuase-hills',
+    title: 'Retreat Centre',
+    category: 'Religious',
+    location: 'Pokuase Hills',
+    tags: ['Architecture'],
+    description: '',
+    featured: true,
   },
   {
     id: 'regal-court',
     title: 'Regal Court',
     category: 'Residential',
     location: 'Tema',
-    tags: ['Architecture', 'Residential'],
-    description: 'Mid-rise residential development with landscaped communal courtyards and generous natural light strategy.',
+    tags: ['Architecture'],
+    description: 'A mid-rise apartment block with landscaped shared courtyards.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/b9c59d245061137.69a597165bf14.jpg',
     behance: 'https://www.behance.net/gallery/245061137/REGAL-COURT-(TEMA)',
-    featured: true,
-    num: '03',
+  },
+  {
+    id: 'all-souls-baptist-church',
+    title: 'All Souls Baptist Church',
+    category: 'Religious',
+    location: 'Ghana',
+    tags: ['Architecture'],
+    description: 'A new church building for the All Souls Baptist congregation.',
+  },
+  {
+    id: 'farmhouse-sogakope',
+    title: 'Farmhouse',
+    category: 'Agricultural',
+    location: 'Sogakope',
+    tags: ['Architecture'],
+    description: 'A single-storey farmhouse under a mono-pitch roof, with a strip of clerestory windows that lets light and air in above the rooms.',
+  },
+  {
+    id: 'pig-sty-bortianor',
+    title: 'Pig Sty',
+    category: 'Agricultural',
+    location: 'Bortianor',
+    tags: ['Architecture'],
+    description: 'Livestock housing for a working farm in Bortianor.',
   },
   {
     id: 'lakeview-manor',
     title: 'Lakeview Manor',
     category: 'Residential',
     location: 'Biriwaa',
-    tags: ['Architecture', 'Residential'],
-    description: 'Waterfront residence carefully composed to respond to its lakeside setting and maximise natural ventilation.',
+    tags: ['Architecture'],
+    description: 'A house on the water at Biriwaa, laid out to catch the breeze off the lake.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/cf7e8e245060857.69a596117b940.jpg',
     behance: 'https://www.behance.net/gallery/245060977/LAKEVIEW-MANOR-(BIRIWAA)',
-    num: '04',
   },
   {
     id: 'apartments-east-legon-hills',
     title: 'Apartments at East Legon Hills',
     category: 'Residential',
     location: 'East Legon Hills',
-    tags: ['Architecture', 'Residential', 'Commercial'],
-    description: 'Multi-unit residential complex blending contemporary massing with contextual sensitivity on a hillside site.',
+    tags: ['Architecture'],
+    description: 'A multi-unit apartment building on a sloping site.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/bbd183245060323.69a593c36a3ad.jpg',
     behance: 'https://www.behance.net/gallery/245060323/APARTMENTS-AT-EAST-LEGON-HILLS',
-    num: '05',
   },
   {
     id: 'residence-amrahia',
     title: 'Residence at Amrahia',
     category: 'Residential',
     location: 'Amrahia',
-    tags: ['Architecture', 'Residential'],
-    description: 'Suburban residence designed with a passive ventilation strategy and strong indoor–outdoor connection.',
+    tags: ['Architecture'],
+    description: 'A family house planned for cross ventilation, with living areas that open onto the garden.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/9863d1245060775.69a595b0d9bca.jpg',
     behance: 'https://www.behance.net/gallery/245060775/RESIDENCE-AT-AMRAHIA',
-    num: '06',
   },
   {
     id: 'residence-oyibi',
     title: 'Residence at Oyibi',
     category: 'Residential',
     location: 'Oyibi',
-    tags: ['Architecture', 'Residential'],
-    description: 'Contemporary family residence with bold facade articulation and efficient spatial organisation.',
+    tags: ['Architecture'],
+    description: 'A contemporary family house with a strongly modelled front elevation.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/fe8723245059113.69a58e53e2376.jpg',
     behance: 'https://www.behance.net/gallery/245059113/RESIDENCE-AT-OYIBI',
-    num: '07',
   },
   {
     id: 'residence-pokuase',
     title: 'Residence at Pokuase',
     category: 'Residential',
     location: 'Pokuase',
-    tags: ['Architecture', 'Residential'],
-    description: 'Compact family home with a considered plan that maximises liveable area within a modest footprint.',
+    tags: ['Architecture'],
+    description: 'A compact family house that fits a full programme onto a small plot.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/9afd67245059007.69a58dd5e9e90.jpg',
     behance: 'https://www.behance.net/gallery/245059007/RESIDENCE-AT-POKUASE',
-    num: '08',
   },
   {
     id: 'diagnostic-centre',
     title: 'Diagnostic Centre',
     category: 'Healthcare',
     location: 'Swedru',
-    tags: ['Architecture', 'Commercial'],
-    description: 'Medical facility with rigorous acoustic separation between consultation rooms and a calm patient environment.',
+    tags: ['Architecture', 'Sound'],
+    description: 'A diagnostic clinic with sound separation between consulting rooms, so conversations stay private.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/33d535245060405.69a5942e8179d.jpg',
     behance: 'https://www.behance.net/gallery/245060405/DIAGNOSTIC-CENTRE-AT-SWEDRU',
-    num: '09',
   },
   {
     id: 'bar-east-legon',
     title: 'Bar at East Legon',
     category: 'Hospitality',
     location: 'East Legon',
-    tags: ['Architecture', 'Commercial', 'Interiors'],
-    description: 'Intimate bar interior balancing warmth and edge — material richness meets a curated acoustic atmosphere.',
+    tags: ['Architecture', 'Interiors'],
+    description: 'A small bar interior in warm, dark materials.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/aeb9e2245063029.69a59eba17811.jpg',
     behance: 'https://www.behance.net/gallery/245059079/BAR-AT-EAST-LEGON',
-    num: '10',
   },
   {
     id: 'lab-interiors-korle-bu',
     title: 'Lab Interiors at Korle Bu',
-    category: 'Interiors',
+    category: 'Healthcare',
     location: 'Korle Bu',
     tags: ['Interiors'],
-    description: 'Clinical laboratory interior with compliance-first spatial planning and carefully controlled surface materials.',
+    description: 'A clinical laboratory fit-out planned around equipment, workflow and easy-clean finishes.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/3b9a8e245060567.69a594e244e68.jpg',
     behance: 'https://www.behance.net/gallery/245060567/LAB-INTERIORS-AT-KORLE-BU',
-    num: '11',
   },
   {
     id: 'lab-interiors',
     title: 'Lab Interiors',
-    category: 'Interiors',
+    category: 'Healthcare',
     location: 'Accra',
     tags: ['Interiors'],
-    description: 'Laboratory interior combining functional rigour with a considered spatial sequence for staff and visitors.',
+    description: 'A laboratory interior arranged so staff and visitors move through it without crossing paths.',
     image: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/a7102a245060825.69a595e7512ef.jpg',
     behance: 'https://www.behance.net/gallery/245060825/LAB-INTERIORS',
-    num: '12',
-  },
-  {
-    id: 'recording-studio',
-    title: 'Recording Studio Design',
-    category: 'Acoustic Design',
-    location: 'Accra',
-    tags: ['Sound'],
-    description: 'Professional recording environment designed from acoustic first-principles — isolation, diffusion, and absorption balanced for studio-grade fidelity.',
-    image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1400&q=85',
-    num: '13',
-  },
-  {
-    id: 'home-theatre',
-    title: 'Home Theatre & Acoustics',
-    category: 'Acoustic Design',
-    location: 'East Legon',
-    tags: ['Sound'],
-    description: 'Residential home theatre with full acoustic treatment — room-mode analysis, panel placement, and speaker calibration for reference-quality playback.',
-    image: 'https://images.unsplash.com/photo-1593784991095-a205069470b6?w=1400&q=85',
-    num: '14',
   },
 ]
 
-export const WORK_FILTERS = ['All Work', 'Architecture', 'Residential', 'Commercial', 'Hospitality', 'Interiors', 'Healthcare', 'Sound']
+/** Order of category chips on the Work page. Categories with no projects are hidden. */
+export const CATEGORY_ORDER = [
+  'Residential', 'Commercial', 'Hospitality', 'Healthcare',
+  'Educational', 'Religious', 'Recreational and Sports', 'Agricultural',
+]
+
+/** Discipline filters, matched against project tags. */
+export const DISCIPLINE_FILTERS = ['Architecture', 'Interiors', 'Sound']
 
 export const PROCESS_STEPS = [
   {
     num: '01',
     title: 'Consultation',
-    desc: 'We discuss your vision, site, budget, and timeline. No commitment required at this stage.',
+    desc: 'A first conversation about the site, the brief, the budget and the timeline. There is no charge for this.',
   },
   {
     num: '02',
-    title: 'Concept & Design',
-    desc: 'Initial concepts, floor plans, 3D renders, and acoustic studies presented for your review.',
+    title: 'Concept',
+    desc: 'Sketches, floor plans and 3D views, plus acoustic studies where the space needs them.',
   },
   {
     num: '03',
-    title: 'Refinement & Approval',
-    desc: 'We iterate based on your feedback until the design is exactly right.',
+    title: 'Design development',
+    desc: 'The design is revised with you until the plans are ready for permits and pricing.',
   },
   {
     num: '04',
-    title: 'Delivery & Execution',
-    desc: 'Construction documentation, contractor coordination, and site oversight to completion.',
+    title: 'Construction',
+    desc: 'Construction drawings, work with the contractor and site visits through to handover.',
   },
 ]
 
-export const TESTIMONIALS = [
-  {
-    id: 1,
-    quote: "Ernest understood what we wanted before we could fully articulate it. The Grand Haven exceeded everything we imagined — both in design and in how the spaces feel to live in.",
-    name: 'Kwame Asante',
-    role: 'Residential Client · East Legon',
-  },
-  {
-    id: 2,
-    quote: "Working with Ernest on our rooftop restaurant was exceptional. He brought a level of spatial thinking we hadn't encountered before — and the acoustics on the terrace are perfect.",
-    name: 'Akua Mensah',
-    role: 'Hospitality Owner · Accra',
-  },
-  {
-    id: 3,
-    quote: "The diagnostic centre was delivered on time, within budget. The acoustic separation between consultation rooms is exactly what a medical facility demands.",
-    name: 'Dr. Emmanuel Ofori',
-    role: 'Clinic Director · Swedru',
-  },
-]
-
-export const DISCIPLINES = [
-  {
-    id: 'arch',
-    icon: 'house',
-    title: 'Architecture & Spatial Logic',
-    sub: 'Residential · Commercial · Healthcare · Hospitality',
-  },
-  {
-    id: 'sound',
-    icon: 'sound',
-    title: 'Sound Engineering & Acoustics',
-    sub: 'Studios · Events · Hospitality · Acoustic Interiors',
-  },
-]
+/**
+ * Client testimonials: { id, quote, name, role }.
+ * Only add real quotes with the client's permission; the section is hidden while this is empty.
+ */
+export const TESTIMONIALS = []
 
 export const MARQUEE_ITEMS = [
-  'Residential', 'Commercial', 'Hospitality', 'Healthcare',
-  'Acoustic Design', 'Studio Design', 'Interiors', 'East Legon',
-  'Tema', 'Accra',
+  'Residential', 'Commercial', 'Hospitality', 'Healthcare', 'Educational',
+  'Religious', 'Agricultural', 'Acoustics', 'Interiors',
+  'Accra', 'Tema', 'Kumasi', 'Sogakope',
 ]
 
 export const ABOUT_TAGS = [
-  { label: 'Architecture',    accent: true },
+  { label: 'Architecture',      accent: true },
   { label: 'Sound Engineering', accent: true },
   { label: 'Interior Design',   accent: false },
   { label: 'Acoustic Design',   accent: false },
   { label: '3D Visualisation',  accent: false },
-  { label: 'Spatial Planning',  accent: false },
+  { label: 'Site Planning',     accent: false },
 ]
 
 export const CONTACT_PROJECT_TYPES = [
-  'Residential Architecture',
-  'Commercial Architecture',
-  'Interior Design',
-  'Hospitality Design',
-  'Healthcare Facility',
-  'Recording Studio / Acoustic Design',
+  'House or apartment',
+  'Commercial or hospitality',
+  'Interior design',
+  'Healthcare facility',
+  'School or church',
+  'Farm building',
+  'Recording studio or acoustics',
   'Renovation',
   'Other',
 ]

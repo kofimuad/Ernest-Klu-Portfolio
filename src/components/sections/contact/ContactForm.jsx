@@ -15,7 +15,7 @@ export default function ContactForm() {
   const handleSubmit = e => {
     e.preventDefault()
 
-    const subject = `Project Inquiry — ${form.projectType || 'New Project'}`
+    const subject = `Project inquiry: ${form.projectType || 'New project'}`
 
     const body = [
       `Name:         ${form.firstName} ${form.lastName}`,
@@ -39,11 +39,11 @@ export default function ContactForm() {
   return (
     <>
       <div className={styles.hero}>
-        <Eyebrow>Get In Touch</Eyebrow>
+        <Eyebrow>Contact</Eyebrow>
         <h1 className={styles.title}>Hire <em>Ernest</em></h1>
         <p className={styles.sub}>
-          Whether you have a brief ready or just an idea — reach out. Ernest is open
-          for commissions across all typologies in Ghana and internationally.
+          Tell Ernest about your site and what you want to build. A finished
+          brief is not needed; a rough idea is enough to start.
         </p>
       </div>
 
@@ -82,7 +82,7 @@ export default function ContactForm() {
         {submitted ? (
           <div className={styles.success}>
             <h2 className={styles.successTitle}>Your email client has opened.</h2>
-            <p className={styles.successBody}>Your inquiry is pre-filled and ready to send — just hit send in your email app. Ernest typically responds within 24 hours.</p>
+            <p className={styles.successBody}>Your inquiry is filled in and ready. Press send in your email app and Ernest will usually reply within 24 hours on weekdays.</p>
             <Button onClick={() => setSubmitted(false)} variant="ghost">Start a new inquiry</Button>
           </div>
         ) : (

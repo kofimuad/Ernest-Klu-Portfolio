@@ -20,7 +20,7 @@
 .cardLight .cardTitle { color: var(--color-ink); }
 .list { display: flex; flex-direction: column; gap: .45rem; }
 .list li { font-size: .75rem; padding-left: .9rem; position: relative; }
-.list li::before { content: '—'; position: absolute; left: 0; font-size: .6875rem; }
+.list li::before { content: ''; position: absolute; left: 0; top: .8em; width: 6px; height: 1px; background: currentColor; }
 .cardDark .list li { color: rgba(245,242,236,.65); }
 .cardDark .list li::before { color: rgba(245,242,236,.3); }
 .cardLight .list li { color: var(--color-stone-dk); }

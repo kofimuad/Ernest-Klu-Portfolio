@@ -3,16 +3,17 @@ import { TESTIMONIALS } from '@/data/content'
 import styles from './Testimonials.module.css'
 
 export default function Testimonials() {
+  if (!TESTIMONIALS.length) return null
   return (
     <section className={styles.section} aria-labelledby="testi-heading">
-      <Eyebrow>Client Feedback</Eyebrow>
+      <Eyebrow>Clients</Eyebrow>
       <h2 id="testi-heading" className={styles.title}>
         What clients <em>say</em>
       </h2>
       <div className={styles.grid}>
         {TESTIMONIALS.map((t) => (
           <figure key={t.id} className={styles.card}>
-            <span className={styles.qmark} aria-hidden="true">"</span>
+            <span className={styles.qmark} aria-hidden="true">&ldquo;</span>
             <blockquote>
               <p className={styles.text}>{t.quote}</p>
             </blockquote>

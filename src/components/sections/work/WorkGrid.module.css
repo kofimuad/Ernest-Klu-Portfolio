@@ -1,20 +1,26 @@
-.header { padding: 4.5rem var(--page-px) 2.5rem; border-bottom: 1px solid rgba(92,98,72,.1); display: flex; align-items: flex-end; justify-content: space-between; background: var(--color-white); }
-.title { font-family: var(--font-serif); font-size: clamp(2.8rem,5vw,4.5rem); font-weight: 700; line-height: 1; color: var(--color-ink); }
-.title em { font-style: italic; color: var(--color-moss); }
-.sub { font-size: 0.8125rem; color: var(--color-stone-dk); max-width: 300px; line-height: 1.75; }
-.filters { display: flex; gap: .5rem; flex-wrap: wrap; padding: 1.3rem var(--page-px); border-bottom: 1px solid rgba(92,98,72,.1); background: var(--color-white); }
-.filter { font-size: 0.625rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--color-stone-dk); background: transparent; border: 1px solid rgba(92,98,72,.18); padding: .4rem 1.1rem; transition: all 0.2s; cursor: pointer; }
-.filterActive, .filter:hover { background: var(--color-moss); color: var(--color-white); border-color: var(--color-moss); }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 2px; background: var(--color-cream-mid); }
-.card { aspect-ratio: 16/10; }
-.wide { grid-column: span 2; aspect-ratio: 21/7; }
-
-@media (max-width: 640px) {
-  .grid { grid-template-columns: 1fr; }
-  .card { aspect-ratio: 4/3; }
-  .wide { grid-column: span 1; aspect-ratio: 4/3; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(1rem, 2vw, 2rem);
+  row-gap: clamp(3rem, 5vw, 5rem);
+  padding: clamp(2.5rem, 5vw, 4.5rem) var(--page-px) clamp(4rem, 8vw, 7rem);
+  background: var(--color-cream);
 }
-.cta { background: var(--color-cream-mid); padding: 4.5rem var(--page-px); text-align: center; border-top: 1px solid rgba(92,98,72,.1); }
-.ctaTitle { font-family: var(--font-serif); font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 700; color: var(--color-ink); margin-bottom: .7rem; }
-.ctaTitle em { font-style: italic; color: var(--color-moss); }
-.ctaSub { font-size: 0.8125rem; color: var(--color-stone-dk); margin-bottom: 1.8rem; }
+.s7 { grid-column: span 7; }
+.s5 { grid-column: span 5; }
+.s4 { grid-column: span 4; }
+
+.empty {
+  padding: 6rem var(--page-px);
+  text-align: center;
+  color: var(--color-stone-dk);
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .s7, .s5, .s4 { grid-column: span 1; }
+  .grid > * > a { --ar: 4 / 3 !important; }
+}
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; row-gap: 2.75rem; }
+}
