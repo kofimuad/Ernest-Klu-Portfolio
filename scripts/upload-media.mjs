@@ -30,6 +30,8 @@ import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
 import { basename, dirname, extname, join, relative, resolve } from 'node:path'
+import http from 'node:http'
+import https from 'node:https'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -39,7 +41,9 @@ const PREFIX = 'ernest-klu/projects'
 const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff', '.heic', '.gif'])
 const VIDEO_EXT = new Set(['.mp4', '.mov', '.m4v', '.webm', '.avi', '.mkv'])
 const MB = 1024 * 1024
-const CHUNK = Number(process.env.CLOUDINARY_CHUNK_BYTES) || 20 * MB
+// Cloudinary needs chunks of at least 5 MB (except the last). Small chunks
+// survive slow or flaky connections better and retry cheaply.
+const CHUNK = Number(process.env.CLOUDINARY_CHUNK_BYTES) || 6 * MB
 const IMAGE_LIMIT = 10 * MB // Cloudinary free plan, per image
 const VIDEO_LIMIT = 100 * MB // Cloudinary free plan, per video
 const VIDEO_TARGET = 88 * MB // aim below the limit to leave room for encoder overshoot
@@ -287,49 +291,99 @@ async function prepareImage(f) {
 
 /* ── Upload ─────────────────────────────────────────────── */
 
-async function post(url, form, headers = {}) {
+/**
+ * POSTs a multipart form with node:https. Unlike fetch() it has no 5-minute
+ * cap on a request, so slow uploads are not cut off; a connection that goes
+ * completely silent for 2 minutes is treated as dropped.
+ */
+function postOnce(url, fields, file, headers) {
+  const boundary = `----ek${Math.random().toString(36).slice(2)}`
+  const parts = []
+  for (const [k, v] of Object.entries(fields)) {
+    parts.push(Buffer.from(`--${boundary}\r\nContent-Disposition: form-data; name="${k}"\r\n\r\n${v}\r\n`))
+  }
+  parts.push(Buffer.from(`--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="${file.name.replace(/"/g, '')}"\r\nContent-Type: application/octet-stream\r\n\r\n`))
+  parts.push(file.data, Buffer.from(`\r\n--${boundary}--\r\n`))
+  const body = Buffer.concat(parts)
+
+  const target = new URL(url)
+  const lib = target.protocol === 'http:' ? http : https
+  return new Promise((resolvePost, rejectPost) => {
+    const req = lib.request(target, {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': `multipart/form-data; boundary=${boundary}`,
+        'Content-Length': body.length,
+      },
+    }, (res) => {
+      const chunks = []
+      res.on('data', (c) => chunks.push(c))
+      res.on('end', () => {
+        let json = {}
+        try { json = JSON.parse(Buffer.concat(chunks).toString('utf8')) } catch { /* not JSON */ }
+        if (res.statusCode >= 200 && res.statusCode < 300) return resolvePost(json)
+        const err = new Error(json?.error?.message || `HTTP ${res.statusCode}`)
+        err.status = res.statusCode
+        rejectPost(err)
+      })
+    })
+    req.setTimeout(120000, () => req.destroy(new Error('connection stalled for 2 minutes')))
+    req.on('error', rejectPost)
+    req.end(body)
+  })
+}
+
+const FATAL = /Invalid Signature|Invalid api_key|Invalid cloud_name|Unknown API key|File size too large|Must supply api_key|cloud_name is disabled/i
+
+function describe(err) {
+  const code = err.code || err.cause?.code || ''
+  if (code === 'ENOTFOUND' || code === 'EAI_AGAIN') return `cannot reach Cloudinary (${code}); check the internet connection`
+  if (/CERT|SELF_SIGNED|UNABLE_TO/.test(code)) return `secure connection blocked (${code}); antivirus or a proxy may be intercepting HTTPS`
+  return code && !err.message.includes(code) ? `${err.message} (${code})` : err.message
+}
+
+async function post(url, fields, file, headers = {}) {
+  const attempts = 6
   for (let attempt = 1; ; attempt++) {
     try {
-      const res = await fetch(url, { method: 'POST', body: form, headers })
-      const body = await res.json().catch(() => ({}))
-      if (!res.ok) throw new Error(body?.error?.message || `HTTP ${res.status}`)
-      return body
+      return await postOnce(url, fields, file, headers)
     } catch (err) {
-      if (attempt >= 3 || /Invalid|Signature|File size too large|api_key/i.test(err.message)) throw err
-      await new Promise((r) => setTimeout(r, 1500 * attempt))
+      const fatal = FATAL.test(err.message) || (err.status >= 400 && err.status < 500 && err.status !== 408 && err.status !== 429)
+      if (fatal || attempt >= attempts) {
+        err.message = describe(err)
+        throw err
+      }
+      const wait = Math.min(30, 2 ** attempt)
+      console.log(`       network problem (${describe(err)}), retrying in ${wait}s...`)
+      await new Promise((r) => setTimeout(r, wait * 1000))
     }
   }
 }
 
-async function upload(env, { path, publicId, type }) {
+async function upload(env, { path, publicId, type, label }) {
   const params = {
     public_id: publicId,
     overwrite: 'true',
     timestamp: Math.floor(Date.now() / 1000),
   }
-  const signature = sign(params, env.secret)
+  const fields = { ...params, api_key: env.key, signature: sign(params, env.secret) }
   const url = `${process.env.CLOUDINARY_API_BASE || 'https://api.cloudinary.com'}/v1_1/${env.cloud}/${type}/upload`
   const data = readFileSync(path)
-  const makeForm = (blob) => {
-    const form = new FormData()
-    for (const [k, v] of Object.entries(params)) form.append(k, String(v))
-    form.append('api_key', env.key)
-    form.append('signature', signature)
-    form.append('file', blob, basename(path))
-    return form
-  }
+  const name = basename(path)
 
-  if (data.length <= CHUNK) return post(url, makeForm(new Blob([data])))
+  if (data.length <= CHUNK) return post(url, fields, { name, data })
 
-  // Large files go up in 20 MB chunks.
+  // Large files go up in pieces; each piece is retried on its own.
   const uploadId = `ek-${Date.now()}-${Math.random().toString(36).slice(2)}`
   let result
   for (let start = 0; start < data.length; start += CHUNK) {
     const end = Math.min(start + CHUNK, data.length) - 1
-    result = await post(url, makeForm(new Blob([data.subarray(start, end + 1)])), {
+    result = await post(url, fields, { name, data: data.subarray(start, end + 1) }, {
       'X-Unique-Upload-Id': uploadId,
       'Content-Range': `bytes ${start}-${end}/${data.length}`,
     })
+    if (label) console.log(`       ${label}: ${mb(end + 1)} of ${mb(data.length)}`)
   }
   return result
 }
@@ -432,9 +486,9 @@ async function main() {
 
   console.log('\nUploading...')
   let done = 0
-  await pool(jobs, CONCURRENCY, async (f) => {
+  const uploadOne = async (f) => {
     try {
-      const res = await upload(env, { path: f.path, publicId: f.publicId, type: f.type })
+      const res = await upload(env, { path: f.path, publicId: f.publicId, type: f.type, label: basename(f.file) })
       const item = { id: res.public_id, type: f.type, w: res.width || f.width, h: res.height || f.height }
       if (f.type === 'video') {
         if (res.duration) item.duration = Math.round(res.duration)
@@ -445,12 +499,16 @@ async function main() {
         }
       }
       f.done = item
-      console.log(`  [${++done}/${jobs.length}] ${f.publicId}`)
+      writeManifest(manifest, projects, true) // save progress after every file
+      console.log(`  [${++done}/${jobs.length}] uploaded ${basename(f.file)}`)
     } catch (err) {
       ++done
       fail(f, err)
     }
-  })
+  }
+  // Photos a few at a time; videos one at a time so each gets the full connection.
+  await pool(jobs.filter((f) => f.type === 'image'), CONCURRENCY, uploadOne)
+  for (const f of jobs.filter((j) => j.type === 'video')) await uploadOne(f)
 
   writeManifest(manifest, projects)
   if (failures.length) {
@@ -460,7 +518,7 @@ async function main() {
 }
 
 /** Adds this run's uploads to media.json, keeping items uploaded in earlier runs. */
-function writeManifest(manifest, projects) {
+function writeManifest(manifest, projects, quiet = false) {
   for (const p of projects) {
     const prev = manifest.projects[p.slug] || {}
     const byId = new Map((prev.items || []).map((i) => [i.id, i]))
@@ -476,7 +534,7 @@ function writeManifest(manifest, projects) {
     }
   }
   writeFileSync(MANIFEST, JSON.stringify(manifest, null, 2) + '\n')
-  console.log(`\nWrote ${relative(ROOT, MANIFEST)}. Commit it to publish the media.`)
+  if (!quiet) console.log(`\nWrote ${relative(ROOT, MANIFEST)}. Commit it to publish the media.`)
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
